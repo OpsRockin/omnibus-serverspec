@@ -15,10 +15,10 @@ Vagrant.configure('2') do |config|
 
   config.vm.hostname = "#{project_name}-omnibus-build-lab"
 
-  #  centos-5.10 libyaml-devel not found
   %w{
     ubuntu-10.04
     ubuntu-12.04
+    centos-5.10
     centos-6.5
   }.each do |platform|
 
@@ -27,6 +27,17 @@ Vagrant.configure('2') do |config|
       c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_#{platform}_chef-provisionerless.box"
     end
 
+    case platform
+    when /^ubuntu/
+      @platform_run_list = [
+        'recipe[omnibus::default]'
+      ]
+    when
+      @platform_run_list = [
+        'recipe[omnibus::rhel]',
+        'recipe[omnibus::default]'
+      ]
+    end
   end
 
   config.vm.provider :virtualbox do |vb|
@@ -60,9 +71,7 @@ Vagrant.configure('2') do |config|
       }
     }
 
-    chef.run_list = [
-      'recipe[omnibus::default]'
-    ]
+    chef.run_list = @platform_run_list
   end
 
   config.vm.provision :shell, :inline => <<-OMNIBUS_BUILD
