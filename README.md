@@ -58,7 +58,7 @@ The complete list of valid platform names can be viewed with the
 Copy `omnibus.rb.example` to `omnibus.rb` and fill it.
 
 ```shell
-omnibus release package PATH    # Upload a single package to S3
+omnibus release package PATH  [ --public]  # Upload a single package to S3
 ```
 
 Package Examples: https://s3.amazonaws.com/omnibus-serverspec/
