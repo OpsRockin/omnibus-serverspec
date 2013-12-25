@@ -60,3 +60,5 @@ Copy `omnibus.rb.example` to `omnibus.rb` and fill it.
 ```shell
 omnibus release package PATH    # Upload a single package to S3
 ```
+
+Package Examples: https://s3.amazonaws.com/omnibus-serverspec/
