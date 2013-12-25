@@ -3,6 +3,9 @@
 This project creates full-stack platform-specific packages for
 `serverspec`!
 
+## はじめに
+
+動かないかもしれません。
 
 ## Vagrant-based Virtualized Build Lab
 
@@ -10,10 +13,10 @@ Every Omnibus project ships will a project-specific
 [Berksfile](http://berkshelf.com/) and [Vagrantfile](http://www.vagrantup.com/)
 that will allow you to build your projects on the following platforms:
 
-* CentOS 5 64-bit
+* (remove due to libyaml-devel not found)CentOS 5 64-bit 
 * CentOS 6 64-bit
 * Ubuntu 10.04 64-bit
-* Ubuntu 11.04 64-bit
+* (remove due to no longer support)Ubuntu 11.04 64-bit
 * Ubuntu 12.04 64-bit
 
 Please note this build-lab is only meant to get you up and running quickly;
