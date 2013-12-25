@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Perform necessary serverspec setup steps
+# after package is installed.
+#
+
+DEST_DIR=/opt/serverspec
+LOCAL_PATH=/usr/local/bin/
+PROGNAME=$(basename $0)
+
+function error_exit
+{
+  echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+  exit 1
+}
+
+MK_LINK=${NO_LINK:-false}
+
+if [ ${MK_LINK} = "false" ]
+then
+  ln -sf ${DEST_DIR}/embedded/bin/rake ${LOCAL_PATH}
+  ln -sf ${DEST_DIR}/embedded/bin/rspec ${LOCAL_PATH}
+  ln -sf ${DEST_DIR}/embedded/bin/serverspec-init ${LOCAL_PATH}
+fi
+
+echo "Thank you for installing serverspec!"
+
+exit 0

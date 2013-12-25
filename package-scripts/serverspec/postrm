@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Perform necessary serverspec removal steps
+# after package is uninstalled.
+#
+
+echo "serverspec has been uninstalled!"
+
+exit 0
