@@ -5,7 +5,7 @@ homepage "CHANGEME.com"
 
 replaces        "serverspec"
 install_path    "/opt/serverspec"
-build_version   '0.14.1_01'
+build_version   '0.15.3_01'
 build_iteration 1
 
 # creates required build directories

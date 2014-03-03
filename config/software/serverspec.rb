@@ -1,6 +1,6 @@
 name "serverspec"
-version "v0.14.1"          # git ref
-gem_version = '0.14.1'  # local_variable
+version "0.15.3"          # git ref
+gem_version = '0.15.3'  # local_variable
 
 dependency "ruby"
 dependency "rubygems"

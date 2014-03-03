@@ -26,18 +26,6 @@ Vagrant.configure('2') do |config|
       c.vm.box = "opscode-#{platform}"
       c.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_#{platform}_chef-provisionerless.box"
     end
-
-    case platform
-    when /^ubuntu/
-      @platform_run_list = [
-        'recipe[omnibus::default]'
-      ]
-    when
-      @platform_run_list = [
-        'recipe[omnibus::rhel]',
-        'recipe[omnibus::default]'
-      ]
-    end
   end
 
   config.vm.provider :virtualbox do |vb|
@@ -50,7 +38,7 @@ Vagrant.configure('2') do |config|
   end
 
   # Ensure a recent version of the Chef Omnibus packages are installed
-  config.omnibus.chef_version = '11.6.2'
+  config.omnibus.chef_version = :latest
 
   # Enable the berkshelf-vagrant plugin
   config.berkshelf.enabled = true
@@ -71,7 +59,9 @@ Vagrant.configure('2') do |config|
       }
     }
 
-    chef.run_list = @platform_run_list
+    chef.run_list = [
+      'recipe[omnibus::default]'
+    ]
   end
 
   config.vm.provision :shell, :inline => <<-OMNIBUS_BUILD
