@@ -16,8 +16,8 @@ Vagrant.configure('2') do |config|
   config.vm.hostname = "#{project_name}-omnibus-build-lab"
 
   #  centos-5.10 exclude due to yum cookbook dependencies..
+  #  ubuntu-10.04
   %w{
-    ubuntu-10.04
     ubuntu-12.04
     centos-6.5
   }.each do |platform|
