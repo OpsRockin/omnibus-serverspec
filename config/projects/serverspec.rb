@@ -1,11 +1,10 @@
-
 name "serverspec"
-maintainer "CHANGE ME"
-homepage "CHANGEME.com"
+maintainer "HiganWorks LLC"
+homepage "higanworks.com"
 
 replaces        "serverspec"
 install_path    "/opt/serverspec"
-build_version   '0.15.3'
+build_version   '1.0.0'
 build_iteration 1
 
 # creates required build directories

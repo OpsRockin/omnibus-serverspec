@@ -1,62 +1,59 @@
-# serverspec Omnibus project
-
+serverspec Omnibus project
+==========================
 This project creates full-stack platform-specific packages for
-`serverspec`!
+[serverspec](http://serverspec.org/ "serverspec - Home")!
 
-## はじめに
+## Setup
 
-動かないかもしれません。
+```
+$ vagrant plugin install vagrant-omnibus
+$ bundle
+```
 
-## Vagrant-based Virtualized Build Lab
+## Build
 
+Kitchen-based Build Environment
+-------------------------------
 Every Omnibus project ships will a project-specific
 [Berksfile](http://berkshelf.com/) and [Vagrantfile](http://www.vagrantup.com/)
-that will allow you to build your projects on the following platforms:
+that will allow you to build your omnibus projects on all of the projects listed
+in the `.kitchen.yml`. You can add/remove additional platforms as needed by
+changing the list found in the `.kitchen.yml` `platforms` YAML stanza.
 
-* (remove due to libyaml-devel not found)CentOS 5 64-bit 
-* CentOS 6 64-bit
-* Ubuntu 10.04 64-bit
-* (remove due to no longer support)Ubuntu 11.04 64-bit
-* Ubuntu 12.04 64-bit
+This build environment is designed to get you up-and-running quickly. However,
+there is nothing that restricts you to building on other platforms. Simply use
+the [omnibus cookbook](https://github.com/opscode-cookbooks/omnibus) to setup
+your desired platform and execute the build steps listed above.
 
-Please note this build-lab is only meant to get you up and running quickly;
-there's nothing inherent in Omnibus that restricts you to just building CentOS
-or Ubuntu packages. See the Vagrantfile to add new platforms to your build lab.
+The default build environment requires Test Kitchen and VirtualBox for local
+development. Test Kitchen also exposes the ability to provision instances using
+various cloud providers like AWS, DigitalOcean, or OpenStack. For more
+information, please see the [Test Kitchen documentation](http://kitchen.ci).
 
-The only requirements for standing up this virtualized build lab are:
-
-* VirtualBox - native packages exist for most platforms and can be downloaded
-from the [VirtualBox downloads page](https://www.virtualbox.org/wiki/Downloads).
-* Vagrant 1.2.1+ - native packages exist for most platforms and can be downloaded
-from the [Vagrant downloads page](http://downloads.vagrantup.com/).
-
-The [vagrant-berkshelf](https://github.com/RiotGames/vagrant-berkshelf) and
-[vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus) Vagrant plugins
-are also required and can be installed easily with the following commands:
+Once you have tweaked your `.kitchen.yml` (or `.kitchen.local.yml`) to your
+liking, you can bring up an individual build environment using the `kitchen`
+command.
 
 ```shell
-$ vagrant plugin install vagrant-berkshelf
-$ vagrant plugin install vagrant-omnibus
+$ bundle exec kitchen converge ubuntu-12.04
 ```
 
-Once the pre-requisites are installed you can build your package across all
-platforms with the following command:
+Then login to the instance and build the project as described in the Usage
+section:
 
 ```shell
-$ vagrant up
+$ bundle exec kitchen login ubuntu-12.04
+[vagrant@ubuntu...] $ cd serverspec
+[vagrant@ubuntu...] $ bundle install
+[vagrant@ubuntu...] $ ...
+[vagrant@ubuntu...] $ ./bin/omnibus build project serverspec
 ```
 
-If you would like to build a package for a single platform the command looks like this:
-
-```shell
-$ vagrant up PLATFORM
-```
-
-The complete list of valid platform names can be viewed with the
-`vagrant status` command.
+For a complete list of all commands and platforms, run `kitchen list` or
+`kitchen help`.
 
 
-### Release to s3
+## Release to s3
 
 Copy `omnibus.rb.example` to `omnibus.rb` and fill it.
 

@@ -1,6 +1,8 @@
+*.sw[a-z]
 *.gem
-*.swp
 .bundle
+.kitchen/
+.kitchen.local.yml
 vendor/bundle
 pkg/*
 .vagrant
