@@ -1,8 +1,12 @@
 driver:
-  name: vagrant
-  customize:
-    cpus: 2
-    memory: 2048
+  name: ec2
+  aws_access_key_id: <%= ENV['RELEASE_S3_ACCESS_KEY'] %>
+  aws_secret_access_key: <%= ENV['RELEASE_S3_SECRET_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  ssh_key: <%= ENV['AWS_SSH_KEY'] %>
+  availability_zone: us-east-1d
+  flavor_id: c3.large
+  require_chef_omnibus: true
   synced_folders:
     - ['../../../', '/home/vagrant/serverspec']
 
@@ -12,7 +16,13 @@ provisioner:
 platforms:
   - name: ubuntu-12.04
     run_list: apt::default
-  - name: centos-6.5
+    driver:
+      image_id: ami-59a4a230
+      username: ubuntu
+  - name: centos-6
+    driver:
+      image_id: ami-935662fa
+      username: ec2-user
 
 suites:
   - name: default
