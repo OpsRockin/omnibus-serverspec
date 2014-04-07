@@ -10,3 +10,4 @@ bin/*
 files/**/cache/
 vendor/cookbooks
 omnibus.rb
+env.sh

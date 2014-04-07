@@ -1,0 +1,55 @@
+{
+  "sources": {
+    "apt": {
+      "locked_version": "2.3.8"
+    },
+    "omnibus": {
+      "locked_version": "1.2.4"
+    },
+    "7-zip": {
+      "locked_version": "1.0.2"
+    },
+    "windows": {
+      "locked_version": "1.12.8"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    },
+    "build-essential": {
+      "locked_version": "1.4.2"
+    },
+    "git": {
+      "locked_version": "3.1.0"
+    },
+    "dmg": {
+      "locked_version": "1.1.0"
+    },
+    "runit": {
+      "locked_version": "1.5.10"
+    },
+    "yum": {
+      "locked_version": "3.0.4"
+    },
+    "yum-epel": {
+      "locked_version": "0.2.0"
+    },
+    "homebrew": {
+      "locked_version": "1.5.4"
+    },
+    "pkgin": {
+      "locked_version": "0.4.0"
+    },
+    "pkgutil": {
+      "locked_version": "0.0.3"
+    },
+    "rbenv": {
+      "locked_version": "1.7.1"
+    },
+    "ohai": {
+      "locked_version": "1.1.4"
+    },
+    "wix": {
+      "locked_version": "1.1.0"
+    }
+  }
+}

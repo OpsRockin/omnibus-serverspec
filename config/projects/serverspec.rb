@@ -4,7 +4,13 @@ homepage "higanworks.com"
 
 replaces        "serverspec"
 install_path    "/opt/serverspec"
-build_version   '1.0.0'
+
+require 'json'
+require 'open-uri'
+s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
+s_versions.select! {|r| r.has_key?('number')}
+
+build_version   s_versions.first['number']
 build_iteration 1
 
 # creates required build directories
