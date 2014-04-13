@@ -1,6 +1,11 @@
 name "serverspec"
-default_version "1.0.0" # Rubygems Option
-gem_version = '1.0.0'   # local_variable
+require 'json'
+require 'open-uri'
+
+s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
+s_versions.select! {|r| r.has_key?('number')}
+default_version s_versions.first['number'] # Rubygems Option
+gem_version = s_versions.first['number']   # local_variable
 
 dependency "ruby"
 dependency "rubygems"

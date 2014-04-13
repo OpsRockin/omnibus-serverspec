@@ -1,0 +1,12 @@
+---
+dependencies:
+  override:
+    - bundle install --jobs=8
+  cache_directories:
+    - ".kitchen"    # test kitchen instance information
+    - "pkg"    # test kitchen instance information
+
+test:
+  override:
+    - ./ci/circle_build.sh:
+        timeout: 1800

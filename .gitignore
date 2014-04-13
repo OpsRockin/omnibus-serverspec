@@ -9,5 +9,6 @@ pkg/*
 bin/*
 files/**/cache/
 vendor/cookbooks
-omnibus.rb
 env.sh
+doenv.sh
+.ssh/

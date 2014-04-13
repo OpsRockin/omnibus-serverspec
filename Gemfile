@@ -12,3 +12,11 @@ gem 'omnibus-software', github: 'opscode/omnibus-software'
 gem 'test-kitchen', github: 'higanworks/test-kitchen'
 gem 'kitchen-vagrant', '~> 0.14'
 gem 'kitchen-ec2'
+gem 'kitchen-digitalocean'
+gem 'rake'
+# gem 'rsync'
+
+group :developmet do
+  gem 'pry'
+end
+
