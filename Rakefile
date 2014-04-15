@@ -7,6 +7,9 @@ platforms.each do |platform|
 end
 
 task :default do
+end
+
+task :sync do
   puts @instances
   @instances.each do |instance|
     system "rsync -avz #{instance['hostname']}:serverspec/pkg/ ./pkg"
