@@ -8,5 +8,5 @@ dependencies:
 
 test:
   override:
-    - ./ci/circle_build.sh:
+    - rake:
         timeout: 1800
