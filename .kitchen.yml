@@ -14,7 +14,7 @@ driver:
     override:
       ssh.private_key_path: <%= ENV['DO_SSH_KEY'] %>
   synced_folders:
-    - ['../../../', '/home/vagrant/serverspec']
+    - ['./', '/home/vagrant/serverspec']
 
 provisioner:
   require_chef_omnibus: 11.8.0
