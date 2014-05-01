@@ -1,4 +1,6 @@
 require 'yaml'
+require 'json'
+require 'open-uri'
 
 platforms = Dir.glob('.kitchen/*.yml')
 @instances = []
@@ -6,19 +8,30 @@ platforms.each do |platform|
   @instances << YAML.load(File.read(platform))
 end
 
+s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
+s_versions.select! {|r| r.has_key?('number')}
+
+build_version  =  s_versions.first['number']
+
 task :default do
+  puts build_version
 end
 
 task :sync do
-  puts @instances
+  # puts @instances
   @instances.each do |instance|
-    system "rsync -avz #{instance['hostname']}:serverspec/pkg/ ./pkg"
+    system "rsync -avz --progress -e 'ssh -C -i #{ENV['DO_SSH_KEY']}' #{instance['hostname']}:/home/vagrant/serverspec/pkg/ ./pkg"
   end
 end
 
 task :release do
   debpkg = Dir.glob('pkg/*.deb').sort.first
-  system "omnibus release package #{debpkg} --public"
+  if debpkg.include?(build_version)
+    system "omnibus release package #{debpkg} --public"
+  end if debpkg
+
   rpmpkg = Dir.glob('pkg/*.rpm').sort.first
-  system "omnibus release package #{rpmpkg} --public"
+  if rpmpkg.include?(build_version)
+    system "omnibus release package #{rpmpkg} --public"
+  end if rpmpkg
 end

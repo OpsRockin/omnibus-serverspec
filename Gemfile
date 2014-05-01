@@ -8,8 +8,7 @@ gem 'omnibus', '~> 3.0'
 gem 'omnibus-software', github: 'opscode/omnibus-software'
 
 # Use Test Kitchen with Vagrant for convering the build environment
-# gem 'test-kitchen',    '~> 1.2'
-gem 'test-kitchen', github: 'higanworks/test-kitchen'
+gem 'test-kitchen',    '~> 1.2'
 gem 'kitchen-vagrant', '~> 0.14'
 gem 'kitchen-ec2'
 gem 'kitchen-digitalocean'

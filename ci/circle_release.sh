@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-bundle exec rake
+set -e
+
+bundle exec rake sync
 bundle exec kitchen destroy
 bundle exec rake release
