@@ -2,8 +2,8 @@ name "serverspec"
 maintainer "HiganWorks LLC"
 homepage "higanworks.com"
 
-override :ruby, version: '2.1.1'
-override :rubygems, version: '2.2.1'
+# override :ruby, version: '2.1.1'
+# override :rubygems, version: '2.2.1'
 
 replaces        "serverspec"
 install_path    "/opt/serverspec"

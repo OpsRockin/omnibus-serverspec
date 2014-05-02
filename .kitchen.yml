@@ -40,4 +40,4 @@ suites:
         build_user:  vagrant
         build_dir:   /home/vagrant/serverspec
         install_dir: /opt/serverspec
-        ruby_version: 2.1.1
+#         ruby_version: 2.1.1
