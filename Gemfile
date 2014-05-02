@@ -12,7 +12,8 @@ gem 'omnibus-software', github: 'opscode/omnibus-software'
 gem 'rake'
 
 group :developmet do
-  gem 'test-kitchen',    '~> 1.2'
+  # gem 'test-kitchen',    '~> 1.2'
+  gem 'test-kitchen', github: 'higanworks/test-kitchen'
   gem 'kitchen-vagrant', '~> 0.14'
   gem 'kitchen-ec2'
   gem 'kitchen-digitalocean'

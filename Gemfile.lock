@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/higanworks/test-kitchen.git
+  revision: 9b232eaeffcbea5e73b2e4278a278f6313106138
+  specs:
+    test-kitchen (1.2.2.dev)
+      mixlib-shellout (~> 1.2)
+      net-scp (~> 1.1)
+      net-ssh (~> 2.7)
+      safe_yaml (~> 1.0)
+      thor (~> 0.18)
+
+GIT
   remote: git://github.com/opscode/omnibus-software.git
   revision: 63f0c8fa76e693362e6d8fbba91fa96bd2aac715
   specs:
@@ -192,12 +203,6 @@ GEM
     slop (3.5.0)
     solve (0.8.2)
     systemu (2.5.2)
-    test-kitchen (1.2.1)
-      mixlib-shellout (~> 1.2)
-      net-scp (~> 1.1)
-      net-ssh (~> 2.7)
-      safe_yaml (~> 1.0)
-      thor (~> 0.18)
     thor (0.18.1)
     timers (1.1.0)
     uber-s3 (0.2.4)
@@ -230,4 +235,4 @@ DEPENDENCIES
   omnibus-software!
   pry
   rake
-  test-kitchen (~> 1.2)
+  test-kitchen!
