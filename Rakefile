@@ -20,7 +20,7 @@ end
 task :sync do
   # puts @instances
   @instances.each do |instance|
-    system "rsync -avz --progress -e 'ssh -C -i #{ENV['DO_SSH_KEY']}' #{instance['hostname']}:/home/vagrant/serverspec/pkg/ ./pkg"
+    system "rsync -avz --progress -e 'ssh -oStrictHostKeyChecking=no -C -i #{ENV['DO_SSH_KEY']}' #{instance['hostname']}:/home/vagrant/serverspec/pkg/ ./pkg"
   end
 end
 
