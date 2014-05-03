@@ -22,7 +22,15 @@ Vagrant.configure("2") do |c|
 
   c.vm.synced_folder ".", "/vagrant", disabled: true
 <% config[:synced_folders].each do |source, destination| %>
-  c.vm.synced_folder "<%= source %>", "<%= destination %>", type: "rsync", rsync__exclude: ".git/"
+  c.vm.synced_folder "<%= source %>", "<%= destination %>", type: "rsync", rsync__exclude: [
+    ".git/",
+    ".ssh/",
+    "env.sh",
+    ".kitchen/",
+    ".bundle/",
+    "vendor/",
+    ".ruby-version"
+  ]
 <% end %>
 
   c.vm.provider :digital_ocean do |provider, override|

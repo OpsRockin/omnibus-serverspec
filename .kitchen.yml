@@ -10,7 +10,7 @@ driver:
       api_key: <%= ENV['DIGITALOCEAN_API_KEY'] %>
       ssh_key_name: omnibus-serverspec
       size: 2GB
-      # region: Singapore 1
+      region: Singapore 1
     override:
       ssh.private_key_path: <%= ENV['DO_SSH_KEY'] %>
   synced_folders:
@@ -40,4 +40,4 @@ suites:
         build_user:  vagrant
         build_dir:   /home/vagrant/serverspec
         install_dir: /opt/serverspec
-#         ruby_version: 2.1.1
+        ruby_version: 2.1.1
