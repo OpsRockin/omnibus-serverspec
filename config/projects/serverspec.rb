@@ -12,6 +12,7 @@ require 'json'
 require 'open-uri'
 s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
 s_versions.select! {|r| r.has_key?('number')}
+s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
 
 build_version   s_versions.first['number']
 build_iteration 1
