@@ -19,6 +19,6 @@ env = {
 }
 
 build do
-  command "sudo #{install_dir}/embedded/bin/gem install serverspec --no-ri --no-rdoc --version=#{gem_version}", :env => env
-  command "sudo ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
+  command "#{install_dir}/embedded/bin/gem install serverspec --no-ri --no-rdoc --version=#{gem_version}", :env => env
+  command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
 end

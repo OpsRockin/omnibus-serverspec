@@ -5,8 +5,8 @@ homepage "higanworks.com"
 # override :ruby, version: '2.1.1'
 # override :rubygems, version: '2.2.1'
 
-replaces        "serverspec"
-install_path    "/opt/serverspec"
+replace         "serverspec"
+install_dir     "/opt/serverspec"
 
 require 'json'
 require 'open-uri'
