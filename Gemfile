@@ -8,7 +8,7 @@ gem 'omnibus-software', github: 'opscode/omnibus-software'
 # gem 'rsync'
 gem 'rake'
 
-group :developmet do
+group :development do
   gem 'test-kitchen', github: 'higanworks/test-kitchen'
   gem 'kitchen-vagrant', '~> 0.14'
   gem 'kitchen-ec2'
