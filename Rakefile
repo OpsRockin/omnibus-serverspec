@@ -18,6 +18,7 @@ task :default do
   puts build_version
 end
 
+desc "collect packages from remote server"
 task :sync do
   # puts @instances
   @instances.each do |instance|

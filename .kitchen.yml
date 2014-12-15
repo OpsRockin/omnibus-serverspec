@@ -6,31 +6,30 @@ driver:
   vagrantfile_erb: <%= File.join(File.dirname(__FILE__), "templates/Vagrantfile.erb") %>
   digitalocean:
     provider:
-      client_id: <%= ENV['DIGITALOCEAN_CLIENT_ID'] %>
-      api_key: <%= ENV['DIGITALOCEAN_API_KEY'] %>
-      ssh_key_name: omnibus-serverspec
+      token: <%= ENV['DIGITALOCEAN_TOKEN'] %>
+      ssh_key_name: <%= ENV['DO_SSH_KEY_NAME'] %>
       size: 2GB
-      region: Singapore 1
+      region: sgp1
     override:
       ssh.private_key_path: <%= ENV['DO_SSH_KEY'] %>
   synced_folders:
     - ['./', '/home/vagrant/serverspec']
 
 provisioner:
-  require_chef_omnibus: 11.8.0
+  require_chef_omnibus: 11.16.4
 
 platforms:
-  - name: ubuntu-12.04
+  - name: ubuntu-14.04
     run_list: apt::default
     driver:
       digitalocean:
         provider:
-          image: Ubuntu 12.04.4 x64
+          image: ubuntu-14-04-x64
   - name: centos-6.5
     driver:
       digitalocean:
         provider:
-          image: CentOS 6.5 x64
+          image: centos-6-5-x64
 
 suites:
   - name: default
@@ -40,4 +39,4 @@ suites:
         build_user:  vagrant
         build_dir:   /home/vagrant/serverspec
         install_dir: /opt/serverspec
-        ruby_version: 2.1.1
+        ruby_version: 2.1.5

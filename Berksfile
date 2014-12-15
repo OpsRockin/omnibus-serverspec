@@ -1,5 +1,4 @@
- #source "https://api.berkshelf.com"
-site :opscode
+source "https://supermarket.chef.io"
 
 # The apt cookbook is required to bring the apt cache up-to-date on Ubuntu
 # systems, since the cache can become stale on older boxes.
