@@ -4,7 +4,7 @@ general:
     - "~/pkg"
 machine:
   ruby:
-    version: 2.1
+    version: 2.1.5
 dependencies:
   cache_directories:
     - ".kitchen"
