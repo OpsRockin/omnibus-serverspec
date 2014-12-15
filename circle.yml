@@ -18,5 +18,5 @@ test:
     - "ci/circle_build_parallel.sh":
         timeout: 3600
         parallel: true
-    - "bundle exec rake sync"
+    - "bundle exec rake sync":
         parallel: true
