@@ -6,8 +6,13 @@ machine:
   ruby:
     version: 2.1.5
 dependencies:
+  pre:
+    - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+    - sudo dpkg -i vagrant_1.6.5_x86_64.deb
+    - vagrant plugin install vagrant-digitalocean
   cache_directories:
-    - ".kitchen"
+    - "~/.kitchen"
+    - ".vagrant"
 test:
   override:
     - "ci/circle_build_parallel.sh":
