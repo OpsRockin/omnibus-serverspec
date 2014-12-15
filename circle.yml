@@ -1,12 +1,12 @@
 ---
+general:
+  artifacts:
+    - "~/pkg"
 dependencies:
-  override:
-    - bundle install --jobs=8
   cache_directories:
-    - ".kitchen"    # test kitchen instance information
-    - "pkg"    # test kitchen instance information
-
+    - ".kitchen"
 test:
   override:
-    - rake:
-        timeout: 1800
+    - "ci/circle_build_parallel.sh":
+        timeout: 3600
+    - "bundle exec rake sync"
