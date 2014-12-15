@@ -11,8 +11,8 @@ dependencies:
     - sudo dpkg -i vagrant_1.6.5_x86_64.deb
     - vagrant plugin install vagrant-digitalocean
   cache_directories:
-    - "~/.kitchen"
-    - ".vagrant"
+    - ".kitchen"
+    - "~/.vagrant.d/"
 test:
   override:
     - "ci/circle_build_parallel.sh":
