@@ -3,5 +3,5 @@
 set -e
 
 bundle exec rake sync
-# bundle exec kitchen destroy
+bundle exec kitchen destroy
 bundle exec rake release

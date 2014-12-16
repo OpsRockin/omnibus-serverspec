@@ -9,14 +9,14 @@ dependencies:
   pre:
     - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
     - sudo dpkg -i vagrant_1.6.5_x86_64.deb
-    - vagrant plugin install vagrant-digitalocean
+    - sudo vagrant plugin install vagrant-digitalocean
   cache_directories:
     - ".kitchen"
     - "~/.vagrant.d/"
 test:
   override:
     - "ci/circle_build_parallel.sh":
-        timeout: 3600
+        timeout: 1200
         parallel: true
     - "bundle exec rake sync":
         parallel: true

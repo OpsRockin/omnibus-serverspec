@@ -8,8 +8,8 @@ driver:
     provider:
       token: <%= ENV['DIGITALOCEAN_TOKEN'] %>
       ssh_key_name: <%= ENV['DO_SSH_KEY_NAME'] %>
-      size: 2GB
-      region: sgp1
+      size: 8GB
+      region: nyc3
     override:
       ssh.private_key_path: <%= ENV['DO_SSH_KEY'] %>
   synced_folders:

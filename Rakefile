@@ -27,13 +27,13 @@ task :sync do
 end
 
 task :release do
-  debpkg = Dir.glob('pkg/*.deb').sort.first
-  if debpkg.include?(build_version)
-    system "omnibus release package #{debpkg} --public"
-  end if debpkg
-
-  rpmpkg = Dir.glob('pkg/*.rpm').sort.first
-  if rpmpkg.include?(build_version)
-    system "omnibus release package #{rpmpkg} --public"
-  end if rpmpkg
+#  debpkg = Dir.glob('pkg/*.deb').sort.first
+#  if debpkg.include?(build_version)
+#    system "omnibus release package #{debpkg} --public"
+#  end if debpkg
+#
+#  rpmpkg = Dir.glob('pkg/*.rpm').sort.first
+#  if rpmpkg.include?(build_version)
+#    system "omnibus release package #{rpmpkg} --public"
+#  end if rpmpkg
 end
