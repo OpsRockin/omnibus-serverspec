@@ -21,8 +21,9 @@ end
 desc "collect packages from remote server"
 task :sync do
   # puts @instances
+  remote_user = ENV['REMOTE_USER_NAME'] || 'root'
   @instances.each do |instance|
-    system "rsync -avz --progress -e 'ssh -oStrictHostKeyChecking=no -C -i #{ENV['DO_SSH_KEY']}' #{instance['hostname']}:/home/vagrant/serverspec/pkg/ ./pkg"
+    system "rsync -avz --progress -e 'ssh -oStrictHostKeyChecking=no -C -i #{ENV['DO_SSH_KEY']}' #{remote_user}@#{instance['hostname']}:/home/vagrant/serverspec/pkg/ ./pkg"
   end
 end
 
