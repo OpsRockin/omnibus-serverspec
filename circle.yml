@@ -20,8 +20,5 @@ test:
         parallel: true
     - "bundle exec rake sync":
         parallel: true
-deployment:
-  production:
-    branch: master
-    commands:
-      - "ci/circle_release.sh"
+    - "ci/circle_release.sh":
+        parallel: true
