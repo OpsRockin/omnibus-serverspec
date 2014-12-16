@@ -10,9 +10,17 @@ This project creates full-stack platform-specific packages for
 ## Setup
 
 ```
-$ vagrant plugin install vagrant-omnibus
+$ vagrant plugin install vagrant-digitalocean  # 0.7.1 or higher
 $ bundle
 ```
+
+### Required Environment Variables
+
+- DIGITALOCEAN_TOKEN
+- DO_SSH_KEY
+- DO_SSH_KEY_NAME
+- PACKAGECLOUD_TOKEN (optional)
+- REMOTE_USER_NAME (optional)
 
 ## Build
 
@@ -39,23 +47,38 @@ liking, you can bring up an individual build environment using the `kitchen`
 command.
 
 ```shell
-$ bundle exec kitchen converge ubuntu-12.04
+$ bundle exec kitchen converge
 ```
 
 Then login to the instance and build the project as described in the Usage
 section:
 
-```shell
-$ bundle exec kitchen login ubuntu-12.04
+```shell with login
+$ bundle exec kitchen login ubuntu(or centos)
 [vagrant@ubuntu...] $ cd serverspec
-[vagrant@ubuntu...] $ bundle install
-[vagrant@ubuntu...] $ ...
-[vagrant@ubuntu...] $ ./bin/omnibus build project serverspec
+[vagrant@ubuntu...] $ bundle install --binstubs
+[vagrant@ubuntu...] $ ./bin/omnibus build serverspec
+```
+
+```use kitchen exec
+$ bundle exec kitchen exec all -c 'serverspec; bundle install --binstubs'
+$ bundle exec kitchen exec all -c 'serverspec; ./bin/omnibus build serverspec'
 ```
 
 For a complete list of all commands and platforms, run `kitchen list` or
 `kitchen help`.
 
+### Collect pkgs in workstation
+
+```
+$ bundle exec rake sync
+```
+
+### Destroy your droplets
+
+```
+$ bundle exec kitchen destroy
+```
 
 ## Release to s3
 
@@ -66,3 +89,9 @@ omnibus release package PATH  [ --public]  # Upload a single package to S3
 ```
 
 Package Examples: https://s3.amazonaws.com/omnibus-serverspec/
+
+## Release to packagecloud.io
+
+```
+bundle exec package_cloud push user/repo pkg/*
+```
