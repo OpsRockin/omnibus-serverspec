@@ -1,7 +1,7 @@
 ---
 general:
   artifacts:
-    - "~/pkg"
+    - "pkg"
 machine:
   ruby:
     version: 2.1.5
