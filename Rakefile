@@ -12,10 +12,16 @@ s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.js
 s_versions.select! {|r| r.has_key?('number')}
 s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
 
+i_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/infrataster.json').read)
+i_versions.select! {|r| r.has_key?('number')}
+i_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
+
 build_version  =  s_versions.first['number']
+i_build_version  =  i_versions.first['number']
 
 task :default do
   puts build_version
+  puts i_build_version
 end
 
 desc "collect packages from remote server"
