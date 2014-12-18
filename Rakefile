@@ -20,8 +20,12 @@ build_version  =  s_versions.first['number']
 i_build_version  =  i_versions.first['number']
 
 task :default do
-  puts build_version
-  puts i_build_version
+  vers = Hash.new
+  vers = {
+    serverspec: build_version,
+    infrataster: i_build_version
+  }
+  puts JSON.pretty_generate vers
 end
 
 desc "collect packages from remote server"
