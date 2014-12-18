@@ -8,6 +8,7 @@ default_version s_versions.first['number'] # Rubygems Option
 gem_version = s_versions.first['number']   # local_variable
 
 dependency "ruby"
+override :ruby, version: "2.1.5"
 dependency "rubygems"
 dependency "bundler"
 

@@ -15,7 +15,11 @@ s_versions.select! {|r| r.has_key?('number')}
 s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
 
 build_version   s_versions.first['number']
-build_iteration 1
+
+override_build_iteration = ENV['BUILD_ITERATION'].to_i || 1
+override_build_iteration = 1 if override_build_iteration == 0
+
+build_iteration override_build_iteration
 
 # creates required build directories
 dependency "preparation"

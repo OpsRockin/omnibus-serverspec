@@ -7,6 +7,8 @@ serverspec Omnibus project
 This project creates full-stack platform-specific packages for
 [serverspec](http://serverspec.org/ "serverspec - Home")!
 
+[Package Changelog is here](https://github.com/OpsRockin/omnibus-serverspec/wiki/CHANGELOG.md)
+
 ## Setup
 
 ```
