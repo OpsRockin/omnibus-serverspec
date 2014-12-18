@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Install omnibus software
-gem 'omnibus', '4.0.0.rc.2'
+gem 'omnibus', '4.0.0'
 gem 'omnibus-software', github: 'opscode/omnibus-software'
 
 # Use Test Kitchen with Vagrant for convering the build environment

@@ -7,11 +7,6 @@ s_versions.select! {|r| r.has_key?('number')}
 default_version s_versions.first['number'] # Rubygems Option
 gem_version = s_versions.first['number']   # local_variable
 
-dependency "ruby"
-override :ruby, version: "2.1.5"
-dependency "rubygems"
-dependency "bundler"
-
 #source :git => "https://github.com/serverspec/serverspec.git"
 #relative_path "serverspec"
 
