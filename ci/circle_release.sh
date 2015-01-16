@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 set -e
+
+rake > pkg/versions.json
+
 if [ "${CIRCLE_BRANCH}" == "master" ]; then
   case $CIRCLE_NODE_INDEX in
     0) TARGET="centos"

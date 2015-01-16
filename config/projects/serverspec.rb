@@ -13,7 +13,7 @@ s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
 
 build_version   s_versions.first['number']
 
-override_build_iteration = ENV['CIRCLE_BUILD_NUM'].to_i || 1
+override_build_iteration = ENV['BUILD_ITERATION'].to_i || 1
 override_build_iteration = 1 if override_build_iteration == 0
 
 build_iteration override_build_iteration

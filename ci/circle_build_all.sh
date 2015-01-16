@@ -2,7 +2,7 @@
 
 set -e
 RUBYPATH="/opt/rubies/ruby-2.1.5/bin"
-BUILD_ITERATION=${BUILD_ITERATION:-1}
+BUILD_ITERATION=${CIRCLE_BUILD_NUM:-1}
 
 bundle exec kitchen destroy
 bundle exec kitchen converge
