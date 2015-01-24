@@ -9,8 +9,8 @@ gem 'omnibus-software', github: 'opscode/omnibus-software'
 gem 'rake'
 
 group :development do
-  gem 'test-kitchen', github: 'higanworks/test-kitchen'
-  gem 'kitchen-vagrant', '~> 0.14'
+  gem 'test-kitchen'
+  gem 'kitchen-vagrant'
   gem 'kitchen-ec2'
   gem 'kitchen-digitalocean'
   # Use Berkshelf for resolving cookbook dependencies
