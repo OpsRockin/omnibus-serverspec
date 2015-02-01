@@ -28,6 +28,10 @@ dependency "rubygems"
 dependency "bundler"
 dependency "serverspec"
 
+# Addons
+dependency "curl"
+
+
 # version manifest file
 dependency "version-manifest"
 
