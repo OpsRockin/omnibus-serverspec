@@ -24,7 +24,6 @@ dependency "preparation"
 # serverspec dependencies/components
 override :ruby, version: "2.1.5"
 dependency "ruby"
-override :rubygems, version: "2.4.5"
 dependency "rubygems"
 dependency "bundler"
 dependency "serverspec"
