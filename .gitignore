@@ -11,4 +11,5 @@ files/**/cache/
 vendor/cookbooks
 env.sh
 doenv.sh
-.ssh/
+/.ssh/
+/.envrc
