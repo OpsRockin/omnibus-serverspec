@@ -15,10 +15,10 @@ env = {
 }
 
 build do
-  gem 'serverspec'
-  gem 'infrataster'
-  gem 'winrm'
-  gem 'docker-api'
+  gem 'install serverspec --no-ri -no-rdoc'
+  gem 'install infrataster --no-ri -no-rdoc'
+  gem 'install winrm --no-ri -no-rdoc'
+  gem 'install docker-api --no-ri -no-rdoc'
 
   command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env
