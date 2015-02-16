@@ -18,6 +18,7 @@ build do
   command "#{install_dir}/embedded/bin/gem install serverspec --no-ri --no-rdoc --version=#{gem_version}", :env => env
   command "#{install_dir}/embedded/bin/gem install winrm --no-ri --no-rdoc", :env => env
   command "#{install_dir}/embedded/bin/gem install infrataster --no-ri --no-rdoc", :env => env
+  command "#{install_dir}/embedded/bin/gem install docker-api --no-ri --no-rdoc", :env => env
   command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rake #{install_dir}/bin/rake", :env => env
