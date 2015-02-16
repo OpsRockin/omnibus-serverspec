@@ -10,11 +10,12 @@ gem 'rake'
 
 group :development do
   gem 'test-kitchen'
-  gem 'kitchen-vagrant'
-  gem 'kitchen-ec2'
+#  gem 'kitchen-vagrant'
+#  gem 'kitchen-ec2'
   gem 'kitchen-digitalocean'
   # Use Berkshelf for resolving cookbook dependencies
-  gem 'berkshelf'
+#  gem 'berkshelf'
+  gem 'librarian-chef'
   gem 'pry'
 end
 
