@@ -75,6 +75,8 @@ GEM
     kitchen-digitalocean (0.8.3)
       droplet_kit (~> 1.0)
       test-kitchen (~> 1.2)
+    kitchen-vagrant (0.15.0)
+      test-kitchen (~> 1.0)
     librarian (0.1.2)
       highline
       thor (~> 0.15)
@@ -164,6 +166,7 @@ PLATFORMS
 
 DEPENDENCIES
   kitchen-digitalocean
+  kitchen-vagrant
   librarian-chef
   omnibus (= 4.0.0)
   omnibus-software!
