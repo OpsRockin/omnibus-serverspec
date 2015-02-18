@@ -2,6 +2,7 @@
 
 set -e
 
+mkdir -p pkg
 rake > pkg/versions.json
 
 if [ "${CIRCLE_BRANCH}" == "master" ]; then
