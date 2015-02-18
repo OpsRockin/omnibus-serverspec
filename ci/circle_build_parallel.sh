@@ -12,6 +12,7 @@ RUBYPATH="/opt/rubies/ruby-2.1.5/bin"
 BUILD_ITERATION=${CIRCLE_BUILD_NUM:-1}
 
 bundle exec kitchen destroy ${TARGET}
+sudo chown ubuntu.ubuntu ${HOME}/.vagrant.d
 bundle exec kitchen converge ${TARGET}
 
 bundle exec kitchen exec ${TARGET} -c "export PATH=${RUBYPATH}:\$PATH; gem install bundler --no-ri --no-rdoc"
