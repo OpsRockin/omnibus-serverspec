@@ -21,6 +21,9 @@ build_iteration override_build_iteration
 # creates required build directories
 dependency "preparation"
 
+## Ruby build (https://github.com/sstephenson/ruby-build/issues/690)
+env['CFLAGS'] << " -fPIC" if ohai['platform'] == 'ubuntu'
+
 # serverspec dependencies/components
 override :ruby,
 version: "2.2.0",
