@@ -34,6 +34,12 @@ override :bundler, version: '1.8.2'
 dependency "bundler"
 dependency "serverspec"
 
+## use mirror tempolary
+override :zlib,
+source: {
+url: 'http://vorboss.dl.sourceforge.net/project/libpng/zlib/1.2.6/zlib-1.2.6.tar.gz'
+}
+
 # Addons
 dependency "curl"
 
