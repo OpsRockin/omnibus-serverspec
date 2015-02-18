@@ -22,10 +22,15 @@ build_iteration override_build_iteration
 dependency "preparation"
 
 # serverspec dependencies/components
-override :ruby, version: "2.1.5"
+override :ruby,
+version: "2.2.0",
+source: {
+md5: "cd03b28fd0b555970f5c4fd481700852"
+}
 dependency "ruby"
 override :rubygems, version: "2.4.5"
 dependency "rubygems"
+override :bundler, version: '1.8.2'
 dependency "bundler"
 dependency "serverspec"
 
