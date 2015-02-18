@@ -36,9 +36,11 @@ dependency "serverspec"
 
 ## use mirror tempolary
 override :zlib,
+version: "1.2.6",
 source: {
 url: 'http://vorboss.dl.sourceforge.net/project/libpng/zlib/1.2.6/zlib-1.2.6.tar.gz'
 }
+dependency "zlib"
 
 # Addons
 dependency "curl"
