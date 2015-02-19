@@ -10,8 +10,6 @@ gem_version = s_versions.first['number']   # local_variable
 #source :git => "https://github.com/serverspec/serverspec.git"
 #relative_path "serverspec"
 
-dependency "appbundler"
-
 env = {
   "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"
 }
@@ -22,5 +20,7 @@ build do
   gem 'install winrm --no-ri -no-rdoc'
   gem 'install docker-api --no-ri -no-rdoc'
 
-  appbundle 'serverspec'
+  command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
+  command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env
+  command "ln -fs #{install_dir}/embedded/bin/rake #{install_dir}/bin/rake", :env => env
 end
