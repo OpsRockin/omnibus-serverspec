@@ -21,15 +21,16 @@ build_iteration override_build_iteration
 # creates required build directories
 dependency "preparation"
 
-## Ruby build 2.2.0 has CFLAG issue (https://github.com/sstephenson/ruby-build/issues/690)
 # serverspec dependencies/components
-# override :ruby,
-# version: "2.2.0",
-# source: {
-# md5: "cd03b28fd0b555970f5c4fd481700852"
-# }
 
-override :ruby, version: "2.1.5"
+## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
+# override :ruby, version: "2.1.5"
+override :ruby,
+version: "2.2.0",
+source: {
+md5: "cd03b28fd0b555970f5c4fd481700852"
+}
+
 dependency "ruby"
 override :rubygems, version: "2.4.5"
 dependency "rubygems"
