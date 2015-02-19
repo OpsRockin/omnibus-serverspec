@@ -22,7 +22,9 @@ build_iteration override_build_iteration
 dependency "preparation"
 
 ## Ruby build (https://github.com/sstephenson/ruby-build/issues/690)
-env['CFLAGS'] << " -fPIC" if ohai['platform'] == 'ubuntu'
+if ohai['platform'] == 'ubuntu'
+  ENV['CFLAGS'] ? ENV['CFLAGS'] = ENV['CFLAGS'] + " -fPIC" : ENV['CFLAGS'] = "-fPIC"
+end
 
 # serverspec dependencies/components
 override :ruby,
