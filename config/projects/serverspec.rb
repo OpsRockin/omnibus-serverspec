@@ -24,7 +24,12 @@ dependency "preparation"
 # serverspec dependencies/components
 
 ## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
-# override :ruby, version: "2.1.5"
+override :cacerts,
+version: "2015.02.25",
+source: {
+md5: "19e7f27540ee694308729fd677163649"
+}
+
 override :ruby,
 version: "2.2.0",
 source: {
