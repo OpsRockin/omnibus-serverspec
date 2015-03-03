@@ -35,6 +35,7 @@ version: "2.2.1",
 source: {
 md5: "b49fc67a834e4f77249eb73eecffb1c9"
 }
+description "The full stack of serverspec with ruby 2.2.1"
 
 dependency "ruby"
 override :rubygems, version: "2.4.5"
