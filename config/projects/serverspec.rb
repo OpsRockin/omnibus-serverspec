@@ -31,15 +31,15 @@ md5: "19e7f27540ee694308729fd677163649"
 }
 
 override :ruby,
-version: "2.2.0",
+version: "2.2.1",
 source: {
-md5: "cd03b28fd0b555970f5c4fd481700852"
+md5: "b49fc67a834e4f77249eb73eecffb1c9"
 }
 
 dependency "ruby"
 override :rubygems, version: "2.4.5"
 dependency "rubygems"
-override :bundler, version: '1.8.2'
+override :bundler, version: '1.8.3'
 dependency "bundler"
 dependency "serverspec"
 
