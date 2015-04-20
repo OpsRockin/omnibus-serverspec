@@ -23,24 +23,26 @@ dependency "preparation"
 
 # serverspec dependencies/components
 
+## Cert updates
+# override :cacerts,
+# version: "2015.02.25",
+# source: {
+# md5: "19e7f27540ee694308729fd677163649"
+# }
+
 ## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
-override :cacerts,
-version: "2015.02.25",
-source: {
-md5: "19e7f27540ee694308729fd677163649"
-}
 
 override :ruby,
-version: "2.2.1",
-source: {
-md5: "b49fc67a834e4f77249eb73eecffb1c9"
+  version: "2.2.2",
+  source: {
+  md5: "326e99ddc75381c7b50c85f7089f3260"
 }
-description "The full stack of serverspec with ruby 2.2.1"
+description "The full stack of serverspec with ruby 2.2.2"
 
 dependency "ruby"
-override :rubygems, version: "2.4.5"
+override :rubygems, version: "2.4.6"
 dependency "rubygems"
-override :bundler, version: '1.8.3'
+override :bundler, version: '1.9.4'
 dependency "bundler"
 dependency "serverspec"
 
