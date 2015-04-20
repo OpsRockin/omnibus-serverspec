@@ -32,15 +32,19 @@ dependency "preparation"
 
 ## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
 
+description "The full stack of serverspec with ruby 2.2.2"
 override :ruby,
   version: "2.2.2",
   source: {
   md5: "326e99ddc75381c7b50c85f7089f3260"
 }
-description "The full stack of serverspec with ruby 2.2.2"
-
 dependency "ruby"
-override :rubygems, version: "2.4.6"
+
+override :rubygems,
+  version: "2.4.6",
+  source: {
+  md5: "5909df4829e5350ca431644322ea9e89"
+  }
 dependency "rubygems"
 override :bundler, version: '1.9.4'
 dependency "bundler"
