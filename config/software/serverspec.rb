@@ -19,6 +19,7 @@ build do
   gem 'install infrataster --no-ri --no-rdoc'
   gem 'install winrm --no-ri --no-rdoc'
   gem 'install docker-api --no-ri --no-rdoc'
+  gem 'install rspec_junit_formatter --no-ri --no-rdoc'
 
   command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env
