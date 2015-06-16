@@ -9,8 +9,9 @@ dependencies:
   pre:
     - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
     - sudo dpkg -i vagrant_1.7.2_x86_64.deb
+    - sudo mkdir -p ~/.vagrant.d/
     - sudo chown -R ubuntu.ubuntu ~/.vagrant.d/
-    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.3 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
+    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.4 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
   cache_directories:
     - ".kitchen"
     - "~/.vagrant.d/"
