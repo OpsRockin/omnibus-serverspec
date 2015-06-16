@@ -1,4 +1,18 @@
 GIT
+  remote: git://github.com/chef/omnibus.git
+  revision: 5ed5e5bfd7c99de66c46aede110cefe1d5d997ac
+  specs:
+    omnibus (4.0.0)
+      chef-sugar (~> 3.0)
+      cleanroom (~> 1.0)
+      mixlib-shellout (~> 1.4)
+      mixlib-versioning
+      ohai (~> 7.2)
+      ruby-progressbar (~> 1.7)
+      thor (~> 0.18)
+      uber-s3
+
+GIT
   remote: git://github.com/opscode/omnibus-software.git
   revision: 6101f15ce7ed2cba1e10803246302fef373a26b3
   specs:
@@ -36,7 +50,7 @@ GEM
       plist (~> 3.1.0)
       pry (~> 0.9)
       rest-client (>= 1.0.4, <= 1.6.7)
-    chef-sugar (2.5.0)
+    chef-sugar (3.1.0)
     chef-zero (2.2.1)
       ffi-yajl (~> 1.1)
       hashie (~> 2.0)
@@ -50,8 +64,6 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
-    domain_name (0.5.24)
-      unf (>= 0.0.5, < 1.0.0)
     droplet_kit (1.2.2)
       activesupport (> 3.0, < 5.0.0)
       faraday (~> 0.9.1)
@@ -68,8 +80,6 @@ GEM
       libyajl2 (~> 1.2)
     hashie (2.1.2)
     highline (1.7.2)
-    http-cookie (1.0.2)
-      domain_name (~> 0.5)
     i18n (0.7.0)
     ice_nine (0.11.1)
     ipaddress (0.8.0)
@@ -99,6 +109,7 @@ GEM
     mixlib-config (2.2.1)
     mixlib-log (1.6.0)
     mixlib-shellout (1.6.1)
+    mixlib-versioning (1.1.0)
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -108,7 +119,6 @@ GEM
     net-ssh-multi (1.2.1)
       net-ssh (>= 2.6.5)
       net-ssh-gateway (>= 1.2.0)
-    netrc (0.10.3)
     ohai (7.4.1)
       ffi (~> 1.9)
       ffi-yajl (~> 1.1)
@@ -120,13 +130,6 @@ GEM
       mixlib-shellout (~> 1.2)
       systemu (~> 2.6.4)
       wmi-lite (~> 1.0)
-    omnibus (4.0.0)
-      chef-sugar (~> 2.2)
-      cleanroom (~> 1.0)
-      mixlib-shellout (~> 1.4)
-      ohai (~> 7.2)
-      thor (~> 0.18)
-      uber-s3
     package_cloud (0.2.19)
       colorize (~> 0.6)
       highline (~> 1.6)
@@ -144,6 +147,7 @@ GEM
       addressable (~> 2.3.6)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    ruby-progressbar (1.7.5)
     safe_yaml (1.0.4)
     slop (3.6.0)
     systemu (2.6.5)
@@ -159,9 +163,6 @@ GEM
       thread_safe (~> 0.1)
     uber-s3 (0.2.4)
       mime-types (~> 1.17)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.1)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -176,9 +177,12 @@ DEPENDENCIES
   kitchen-digitalocean
   kitchen-vagrant
   librarian-chef
-  omnibus (= 4.0.0)
+  omnibus!
   omnibus-software!
   package_cloud
   pry
   rake
   test-kitchen
+
+BUNDLED WITH
+   1.10.3
