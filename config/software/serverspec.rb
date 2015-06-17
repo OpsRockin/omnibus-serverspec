@@ -5,6 +5,7 @@ require 'open-uri'
 s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
 s_versions.select! {|r| r.has_key?('number')}
 default_version s_versions.first['number'] # Rubygems Option
+build_version s_versions.first['number'] # Build Option
 gem_version = s_versions.first['number']   # local_variable
 
 #source :git => "https://github.com/serverspec/serverspec.git"
@@ -20,6 +21,7 @@ build do
   gem 'install winrm --no-ri --no-rdoc'
   gem 'install docker-api --no-ri --no-rdoc'
   gem 'install rspec_junit_formatter --no-ri --no-rdoc'
+  gem 'install pry pry-doc --no-ri --no-rdoc'
 
   command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env
