@@ -13,3 +13,7 @@ env.sh
 doenv.sh
 /.ssh/
 /.envrc
+/.librarian/
+/.rvmrc
+/cookbooks/
+/tmp/

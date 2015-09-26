@@ -26,15 +26,18 @@ Vagrant.configure("2") do |c|
     ".git/",
     ".ssh/",
     "env.sh",
+    ".envrc",
     ".kitchen/",
     ".bundle/",
+    ".librarian/",
     "vendor/",
-    ".ruby-version"
+    ".ruby-version",
+    "pkg/"
   ]
 <% end %>
 
   c.vm.provider :digital_ocean do |provider, override|
-    load '../../../lib_monkey/sync_folders.rb'
+#    load '../../../lib_monkey/sync_folders.rb'
 <% config[:digitalocean][:provider].each do |key, value| %>
     provider.<%= key %> = "<%= value%>"
 <% end %>

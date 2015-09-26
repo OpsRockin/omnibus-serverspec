@@ -7,11 +7,11 @@ machine:
     version: 2.1.5
 dependencies:
   pre:
-    - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
-    - sudo dpkg -i vagrant_1.7.2_x86_64.deb
+    - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+    - sudo dpkg -i vagrant_1.7.4_x86_64.deb
     - sudo mkdir -p ~/.vagrant.d/
     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
-    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.4 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
+    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
   cache_directories:
     - ".kitchen"
     - "~/.vagrant.d/"

@@ -21,6 +21,7 @@ elif [ "${CIRCLE_BRANCH}" == "release_package" ]; then
     0) TARGET="centos"
       bundle exec kitchen destroy ${TARGET}
       bundle exec package_cloud push omnibus-serverspec/serverspec/el/6 pkg/*.rpm
+      bundle exec package_cloud push omnibus-serverspec/serverspec/el/7 pkg/*.rpm
       ;;
     1) TARGET="ubuntu"
       bundle exec kitchen destroy ${TARGET}
