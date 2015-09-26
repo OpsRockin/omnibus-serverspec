@@ -4,6 +4,7 @@ source_dir             './local/omnibus/src'
 build_dir              './local/omnibus/build'
 package_dir            './local/omnibus/pkg'
 package_tmp            './local/omnibus/pkg-tmp'
+append_timestamp false
 
 if ENV['AWS_ACCESS_KEY_ID'] and ENV['AWS_SECRET_ACCESS_KEY'] and ENV['S3_BUCKET']
   s3_access_key ENV['AWS_ACCESS_KEY_ID']
