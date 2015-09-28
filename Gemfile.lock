@@ -13,8 +13,9 @@ GIT
       thor (~> 0.18)
 
 GIT
-  remote: git://github.com/opscode/omnibus-software.git
-  revision: 285425ba926fb866a8867dd65c5b0e97fd9d1e7e
+  remote: git://github.com/higanworks/omnibus-software.git
+  revision: 5c6b2f75732bf80b7e2bdc4e29b887a3fbf05ddb
+  ref: cacert/use_utf8_for_file-foreach
   specs:
     omnibus-software (4.0.0)
 
@@ -194,7 +195,7 @@ GEM
       specinfra (~> 2.43)
     sfl (2.2)
     slop (3.6.0)
-    specinfra (2.43.8)
+    specinfra (2.43.9)
       net-scp
       net-ssh (~> 2.7)
       net-telnet
@@ -231,3 +232,6 @@ DEPENDENCIES
   pry
   rake
   test-kitchen
+
+BUNDLED WITH
+   1.10.6
