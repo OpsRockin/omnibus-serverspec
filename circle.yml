@@ -5,24 +5,26 @@ general:
 machine:
   ruby:
     version: 2.1.5
+  services:
+    - docker
 dependencies:
   pre:
-    - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
-    - sudo dpkg -i vagrant_1.7.4_x86_64.deb
-    - sudo mkdir -p ~/.vagrant.d/
-    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
-    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
+    #     - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+    #     - sudo dpkg -i vagrant_1.7.4_x86_64.deb
+    #     - sudo mkdir -p ~/.vagrant.d/
+    #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
+    #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
   cache_directories:
     - ".kitchen"
     - "~/.vagrant.d/"
 test:
   pre:
     - sudo chown -R ubuntu.ubuntu ~/.vagrant.d/
-  override:
-    - "ci/circle_build_parallel.sh":
-        timeout: 1200
-        parallel: true
-    - "bundle exec rake sync":
-        parallel: true
-    - "ci/circle_release.sh":
-        parallel: true
+#   override:
+#     - "ci/circle_build_parallel.sh":
+#         timeout: 1200
+#         parallel: true
+#     - "bundle exec rake sync":
+#         parallel: true
+#     - "ci/circle_release.sh":
+#         parallel: true
