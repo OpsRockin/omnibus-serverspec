@@ -21,12 +21,9 @@ dependencies:
     - docker pull opsrock/omnibus_base_centos6
     - docker build -t builder-ubuntu1404 -f docker/Dockerfile.ubuntu1404 .
     - docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
-    #     - sudo mkdir -p ~/.vagrant.d/
-    #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
-    #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
 test:
   override:
-    - "docker run  -it -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM builder-ubuntu1404":
+    - "docker run  -it -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v `pwd`/pkg:/home/omnibus-project/pkg builder-ubuntu1404":
         timeout: 1200
-    - "docker run  -it -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v pkg:/home/omnibus-project/pkg builder-centos6":
+    - "docker run  -it -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v `pwd`/pkg:/home/omnibus-project/pkg builder-centos6":
         timeout: 1200
