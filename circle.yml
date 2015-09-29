@@ -13,8 +13,8 @@ machine:
     - docker
 dependencies:
   pre:
-    #     - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
-    #     - sudo dpkg -i vagrant_1.7.4_x86_64.deb
+    - docker pull opsrock/omnibus_base_ubuntu14
+    - docker pull opsrock/omnibus_base_centos6
     #     - sudo mkdir -p ~/.vagrant.d/
     #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
     #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
