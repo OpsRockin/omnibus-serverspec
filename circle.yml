@@ -16,7 +16,6 @@ dependencies:
     #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
 test:
   pre:
-    - docker pull opsrock/omnibus_base_ubuntu14
     - docker run --rm -it -e OMNIBUS_PROJECT=serverspec opsrock/omnibus_base_ubuntu14
 #   override:
 #     - "ci/circle_build_parallel.sh":
