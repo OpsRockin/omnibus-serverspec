@@ -21,7 +21,7 @@ dependencies:
 test:
   override:
     - "docker run --rm -it -e OMNIBUS_PROJECT=serverspec opsrock/omnibus_base_ubuntu14":
-      timeout: 1200
+        timeout: 1200
 #   override:
 #     - "ci/circle_build_parallel.sh":
 #         timeout: 1200
