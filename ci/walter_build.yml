@@ -3,7 +3,7 @@ pipeline:
     parallel:
       - name: ubuntu14
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v `pwd`/pkg:/home/omnibus/omnibus-project/pkg builder-ubuntu1404
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg builder-ubuntu1404
       - name: centos6
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v `pwd`/pkg:/home/omnibus/omnibus-project/pkg builder-centos6
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e CIRCLE_BUILD_NUM -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg builder-centos6
