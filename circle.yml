@@ -19,8 +19,8 @@ dependencies:
     #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
     #     - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
 test:
-  pre:
-    - docker run --rm -it -e OMNIBUS_PROJECT=serverspec opsrock/omnibus_base_ubuntu14:
+  override:
+    - "docker run --rm -it -e OMNIBUS_PROJECT=serverspec opsrock/omnibus_base_ubuntu14":
       timeout: 1200
 #   override:
 #     - "ci/circle_build_parallel.sh":
