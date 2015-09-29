@@ -13,8 +13,9 @@ machine:
     - docker
 dependencies:
   cache_directories:
-    - "~/.dockers/"
+    - "~/walter"
   pre:
+    - bash ./ci/install-walter-1.2.0.sh
     - mkdir -p ~/.dockers/
     - docker pull opsrock/omnibus_base_ubuntu14
     - docker pull opsrock/omnibus_base_centos6
