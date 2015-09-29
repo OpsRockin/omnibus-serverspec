@@ -22,7 +22,7 @@ dependencies:
     - docker pull opsrock/omnibus_base_centos6
     - docker build -t builder-ubuntu1404 -f docker/Dockerfile.ubuntu1404 .
     - docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
+    - ~/bin/walter -c ci/walter_build.yml
 test:
   override:
-    - "~/bin/walter -c ci/walter_build.yml":
-        timeout: 1200
+    - echo true
