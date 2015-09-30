@@ -1,31 +1,11 @@
 #!/usr/bin/env bash
 
 set -e
+rake release_to_packagecloud[$CIRCLE_BRANCH,el/6,'rpm']
+rake yank_oldest_release[$CIRCLE_BRANCH,el/6]
 
-mkdir -p pkg
-rake > pkg/versions.json
+rake release_to_packagecloud[$CIRCLE_BRANCH,el/7,'rpm']
+rake yank_oldest_release[$CIRCLE_BRANCH,el/7]
 
-if [ "${CIRCLE_BRANCH}" == "master" ]; then
-  case $CIRCLE_NODE_INDEX in
-    0) TARGET="centos"
-      bundle exec kitchen destroy ${TARGET}
-      bundle exec package_cloud push omnibus-serverspec/dummy_with_ci/el/6 pkg/*.rpm
-      ;;
-    1) TARGET="ubuntu"
-      bundle exec kitchen destroy ${TARGET}
-      bundle exec package_cloud push omnibus-serverspec/dummy_with_ci/ubuntu/trusty pkg/*.deb
-      ;;
-  esac
-elif [ "${CIRCLE_BRANCH}" == "release_package" ]; then
-  case $CIRCLE_NODE_INDEX in
-    0) TARGET="centos"
-      bundle exec kitchen destroy ${TARGET}
-      bundle exec package_cloud push omnibus-serverspec/serverspec/el/6 pkg/*.rpm
-      bundle exec package_cloud push omnibus-serverspec/serverspec/el/7 pkg/*.rpm
-      ;;
-    1) TARGET="ubuntu"
-      bundle exec kitchen destroy ${TARGET}
-      bundle exec package_cloud push omnibus-serverspec/serverspec/ubuntu/trusty pkg/*.deb
-      ;;
-  esac
-fi
+rake release_to_packagecloud[$CIRCLE_BRANCH,ubuntu/trusty,'deb']
+rake yank_oldest_release[$CIRCLE_BRANCH,ubuntu/trusty]

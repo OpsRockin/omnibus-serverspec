@@ -1,7 +1,6 @@
 require 'yaml'
 require 'json'
 require 'open-uri'
-require 'package_cloud'
 
 
 task :default do
@@ -50,7 +49,8 @@ task :release_to_packagecloud do |t, args|
     reponame = 'dummy_with_ci'
   end
 
-  system "bundle exec package_cloud push omnibus-serverspec/#{reponame}/#{args['dist']} pkg/*.#{args['type']}"
+  raise unless system "bundle exec package_cloud push omnibus-serverspec/#{reponame}/#{args['dist']} pkg/*.#{args['type']}"
+  end
 end
 
 task :yank_oldest_release, 'branch', 'dist'
