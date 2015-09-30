@@ -30,8 +30,8 @@ deployment:
   master:
     branch: master
     commands:
-      - ./ci/circle_release.sh
+      - ~/bin/walter -c ci/walter_release.yml
   devrelease:
     branch: /build_.*/
     commands:
-      - ./ci/circle_release.sh
+      - ~/bin/walter -c ci/walter_release.yml

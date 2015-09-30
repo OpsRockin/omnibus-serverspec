@@ -1,0 +1,12 @@
+pipeline:
+  - name: Build pkgs
+    parallel:
+      - name: ubuntu14
+        type: command
+        command: ./ci/circle_release.sh ubuntu/trusty deb
+      - name: centos6
+        type: command
+        command: ./ci/circle_release.sh el/6 rpm
+      - name: centos7
+        type: command
+        command: ./ci/circle_release.sh el/7 rpm
