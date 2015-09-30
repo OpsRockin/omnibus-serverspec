@@ -50,7 +50,6 @@ task :release_to_packagecloud do |t, args|
   end
 
   raise unless system "bundle exec package_cloud push omnibus-serverspec/#{reponame}/#{args['dist']} pkg/*.#{args['type']}"
-  end
 end
 
 task :yank_oldest_release, 'branch', 'dist'
@@ -70,18 +69,21 @@ def get_oldest_pkg(args)
   case args['branch']
   when 'master'
     reponame = 'serverspec'
+    gen = 5
   else
     reponame = 'dummy_with_ci'
+    gen = 2
   end
-  if args['branch'] == 'master'
-  else
-    target_pkgs = JSON.parse(open(
-      "https://packagecloud.io/api/v1/repos/omnibus-serverspec/#{reponame}/packages.json",
-      {:http_basic_authentication => [ENV['PACKAGECLOUD_TOKEN'], ""]}
-    ).read).select {|pkg|
-      pkg['distro_version'] == args['dist']
-    }
-    (target_pkgs.sort {|a,b| Time.parse(a['created_at']) <=> Time.parse(b['created_at']) }).first
-  end
+
+  target_pkgs = JSON.parse(open(
+    "https://packagecloud.io/api/v1/repos/omnibus-serverspec/#{reponame}/packages.json",
+    {:http_basic_authentication => [ENV['PACKAGECLOUD_TOKEN'], ""]}
+  ).read).select {|pkg|
+    pkg['distro_version'] == args['dist']
+  }
+
+  return [] if target_pkgs.length <= gen
+
+  (target_pkgs.sort {|a,b| Time.parse(a['created_at']) <=> Time.parse(b['created_at']) }).first
 end
 
