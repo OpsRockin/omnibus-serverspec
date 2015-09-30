@@ -28,9 +28,13 @@ $ bundle exec kitchen converge
 Then login to the instance and build the project as described in the Usage
 section:
 
+You should clone project files when loggd in to VM to avoid conflict bundled environment.
+
 ```shell with login
 $ bundle exec kitchen login ubuntu(or centos)
-[vagrant@ubuntu...] $ cd serverspec
+[vagrant@ubuntu...] $ git clone serverspec vm
+[vagrant@ubuntu...] $ cd vm
+[vagrant@ubuntu...] $ source /home/omnibus/load-omnibus-toolchain.sh 
 [vagrant@ubuntu...] $ bundle install --binstubs
 [vagrant@ubuntu...] $ ./bin/omnibus build serverspec
 ```
