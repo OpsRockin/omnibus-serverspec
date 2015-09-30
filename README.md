@@ -7,48 +7,21 @@ serverspec Omnibus project
 This project creates full-stack platform-specific packages for
 [serverspec](http://serverspec.org/ "serverspec - Home")!
 
-[Package Changelog is here](https://github.com/OpsRockin/omnibus-serverspec/wiki/CHANGELOG.md)
+Now, omnibus-serverspec building step is dockernized.
 
-## Setup
+- https://github.com/OpsRockin/omnibus_base_ubuntu14
+- https://github.com/OpsRockin/omnibus_base_centos6
 
-```
-$ vagrant plugin install vagrant-digitalocean  # 0.7.1 or higher
-$ bundle
-```
 
-### Required Environment Variables
-
-- DIGITALOCEAN_TOKEN
-- DO_SSH_KEY
-- DO_SSH_KEY_NAME
-- PACKAGECLOUD_TOKEN (optional)
-- REMOTE_USER_NAME (optional)
-
-## Build
+## Build for Developers
 
 Kitchen-based Build Environment
 -------------------------------
-Every Omnibus project ships will a project-specific
-[Berksfile](http://berkshelf.com/) and [Vagrantfile](http://www.vagrantup.com/)
-that will allow you to build your omnibus projects on all of the projects listed
-in the `.kitchen.yml`. You can add/remove additional platforms as needed by
-changing the list found in the `.kitchen.yml` `platforms` YAML stanza.
 
-This build environment is designed to get you up-and-running quickly. However,
-there is nothing that restricts you to building on other platforms. Simply use
-the [omnibus cookbook](https://github.com/opscode-cookbooks/omnibus) to setup
-your desired platform and execute the build steps listed above.
-
-The default build environment requires Test Kitchen and VirtualBox for local
-development. Test Kitchen also exposes the ability to provision instances using
-various cloud providers like AWS, DigitalOcean, or OpenStack. For more
-information, please see the [Test Kitchen documentation](http://kitchen.ci).
-
-Once you have tweaked your `.kitchen.yml` (or `.kitchen.local.yml`) to your
-liking, you can bring up an individual build environment using the `kitchen`
-command.
+Prepare VMs.
 
 ```shell
+$ bundle exec librarian-chef install
 $ bundle exec kitchen converge
 ```
 
@@ -62,38 +35,10 @@ $ bundle exec kitchen login ubuntu(or centos)
 [vagrant@ubuntu...] $ ./bin/omnibus build serverspec
 ```
 
-```use kitchen exec
-$ bundle exec kitchen exec all -c 'serverspec; bundle install --binstubs'
-$ bundle exec kitchen exec all -c 'serverspec; ./bin/omnibus build serverspec'
-```
 
-For a complete list of all commands and platforms, run `kitchen list` or
-`kitchen help`.
-
-### Collect pkgs in workstation
-
-```
-$ bundle exec rake sync
-```
-
-### Destroy your droplets
+### Destroy your VMs
 
 ```
 $ bundle exec kitchen destroy
 ```
 
-## Release to s3
-
-Copy `omnibus.rb.example` to `omnibus.rb` and fill it.
-
-```shell
-omnibus release package PATH  [ --public]  # Upload a single package to S3
-```
-
-Package Examples: https://s3.amazonaws.com/omnibus-serverspec/
-
-## Release to packagecloud.io
-
-```
-bundle exec package_cloud push user/repo pkg/*
-```
