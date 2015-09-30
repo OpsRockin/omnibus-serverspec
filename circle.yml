@@ -5,24 +5,33 @@ general:
 machine:
   ruby:
     version: 2.1.5
+  pre:
+    - echo 'DOCKER_OPTS="-s btrfs -e lxc -D --userland-proxy=false"' | sudo tee -a /etc/default/docker
+    - sudo curl -L -o /usr/bin/docker 'https://s3-external-1.amazonaws.com/circle-downloads/docker-1.8.2-circleci'
+    - sudo chmod 0755 /usr/bin/docker
+  services:
+    - docker
 dependencies:
-  pre:
-    - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
-    - sudo dpkg -i vagrant_1.7.4_x86_64.deb
-    - sudo mkdir -p ~/.vagrant.d/
-    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-vbguest-0.10.0 ] ; then sudo vagrant plugin install vagrant-vbguest ; fi
-    - if [ ! -d /home/ubuntu/.vagrant.d/gems/gems/vagrant-digitalocean-0.7.7 ] ; then sudo vagrant plugin install vagrant-digitalocean ; fi
   cache_directories:
-    - ".kitchen"
-    - "~/.vagrant.d/"
-test:
+    - "~/walter"
+    #    - "~/.omnibus_cache"
   pre:
-    - sudo chown -R ubuntu.ubuntu ~/.vagrant.d/
+    - bash ./ci/install-walter-1.2.0.sh
+    - bash -c 'mkdir -p ~/.omnibus_cache/{ubuntu14,centos6}'
+    - docker pull opsrock/omnibus_base_ubuntu14
+    - docker pull opsrock/omnibus_base_centos6
+    - docker build -t builder-ubuntu1404 -f docker/Dockerfile.ubuntu1404 .
+    - docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
+    - ~/bin/walter -c ci/walter_build.yml
+test:
   override:
-    - "ci/circle_build_parallel.sh":
-        timeout: 1200
-        parallel: true
-    - "bundle exec rake sync":
-        parallel: true
-    - "ci/circle_release.sh":
-        parallel: true
+    - rake > pkg/versions.json
+deployment:
+  master:
+    branch: master
+    commands:
+      - ./ci/circle_release.sh
+  devrelease:
+    branch: /build_.*/
+    commands:
+      - ./ci/circle_release.sh

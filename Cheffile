@@ -3,14 +3,5 @@
 
 site 'https://supermarket.getchef.com/api/v1'
 
-cookbook 'chef-client'
-
-cookbook 'apt', '>= 2.0'
+cookbook 'apt'
 cookbook 'omnibus'
-
-# cookbook 'rvm',
-#   :git => 'https://github.com/fnichol/chef-rvm'
-
-# cookbook 'postgresql',
-#   :git => 'https://github.com/findsyou/cookbooks',
-#   :ref => 'postgresql-improvements'

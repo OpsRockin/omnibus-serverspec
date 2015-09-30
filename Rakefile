@@ -2,39 +2,33 @@ require 'yaml'
 require 'json'
 require 'open-uri'
 
-platforms = Dir.glob('.kitchen/*.yml')
-@instances = []
-platforms.each do |platform|
-  @instances << YAML.load(File.read(platform))
-end
-
-s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
-s_versions.select! {|r| r.has_key?('number')}
-s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
-
-si_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/specinfra.json').read)
-si_versions.select! {|r| r.has_key?('number')}
-si_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
-
-i_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/infrataster.json').read)
-i_versions.select! {|r| r.has_key?('number')}
-i_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
-
-d_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/docker-api.json').read)
-d_versions.select! {|r| r.has_key?('number')}
-d_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
-
-w_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/winrm.json').read)
-w_versions.select! {|r| r.has_key?('number')}
-w_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
-
-build_version  =  s_versions.first['number']
-si_build_version  =  si_versions.first['number']
-i_build_version  =  i_versions.first['number']
-d_build_version  =  d_versions.first['number']
-w_build_version  =  w_versions.first['number']
 
 task :default do
+  s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
+  s_versions.select! {|r| r.has_key?('number')}
+  s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
+
+  si_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/specinfra.json').read)
+  si_versions.select! {|r| r.has_key?('number')}
+  si_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
+
+  i_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/infrataster.json').read)
+  i_versions.select! {|r| r.has_key?('number')}
+  i_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
+
+  d_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/docker-api.json').read)
+  d_versions.select! {|r| r.has_key?('number')}
+  d_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
+
+  w_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/winrm.json').read)
+  w_versions.select! {|r| r.has_key?('number')}
+  w_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
+
+  build_version  =  s_versions.first['number']
+  si_build_version  =  si_versions.first['number']
+  i_build_version  =  i_versions.first['number']
+  d_build_version  =  d_versions.first['number']
+  w_build_version  =  w_versions.first['number']
   vers = Hash.new
   vers = {
     serverspec: build_version,
@@ -46,23 +40,50 @@ task :default do
   puts JSON.pretty_generate vers
 end
 
-desc "collect packages from remote server"
-task :sync do
-  # puts @instances
-  remote_user = ENV['REMOTE_USER_NAME'] || 'root'
-  @instances.each do |instance|
-    system "rsync -avz --progress -e 'ssh -oStrictHostKeyChecking=no -C -i #{ENV['DO_SSH_KEY']}' #{remote_user}@#{instance['hostname']}:/home/vagrant/serverspec/pkg/ ./pkg"
+task :release_to_packagecloud, 'branch', 'dist', 'type'
+task :release_to_packagecloud do |t, args|
+  case args['branch']
+  when 'master'
+    reponame = 'serverspec'
+  else
+    reponame = 'dummy_with_ci'
+  end
+
+  raise unless system "bundle exec package_cloud push omnibus-serverspec/#{reponame}/#{args['dist']} pkg/*.#{args['type']}"
+end
+
+task :yank_oldest_release, 'branch', 'dist'
+task :yank_oldest_release do |t, args|
+  oldest = get_oldest_pkg(args)
+  unless oldest.empty?
+    if args['branch'] == 'master'
+      system "bundle exec package_cloud yank omnibus-serverspec/serverspec/#{args['dist']} #{oldest['filename']}"
+    else
+      system "bundle exec package_cloud yank omnibus-serverspec/dummy_with_ci/#{args['dist']} #{oldest['filename']}"
+    end
   end
 end
 
-task :release do
-#  debpkg = Dir.glob('pkg/*.deb').sort.first
-#  if debpkg.include?(build_version)
-#    system "omnibus release package #{debpkg} --public"
-#  end if debpkg
-#
-#  rpmpkg = Dir.glob('pkg/*.rpm').sort.first
-#  if rpmpkg.include?(build_version)
-#    system "omnibus release package #{rpmpkg} --public"
-#  end if rpmpkg
+
+def get_oldest_pkg(args)
+  case args['branch']
+  when 'master'
+    reponame = 'serverspec'
+    gen = 5
+  else
+    reponame = 'dummy_with_ci'
+    gen = 2
+  end
+
+  target_pkgs = JSON.parse(open(
+    "https://packagecloud.io/api/v1/repos/omnibus-serverspec/#{reponame}/packages.json",
+    {:http_basic_authentication => [ENV['PACKAGECLOUD_TOKEN'], ""]}
+  ).read).select {|pkg|
+    pkg['distro_version'] == args['dist']
+  }
+
+  return [] if target_pkgs.length <= gen
+
+  (target_pkgs.sort {|a,b| Time.parse(a['created_at']) <=> Time.parse(b['created_at']) }).first
 end
+

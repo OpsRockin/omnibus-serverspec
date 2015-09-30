@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 # Install omnibus software
 # gem 'omnibus', '4.0.0'
 gem 'omnibus', github: 'chef/omnibus'
-gem 'omnibus-software', github: 'opscode/omnibus-software'
+# gem 'omnibus-software', github: 'opscode/omnibus-software'
+gem 'omnibus-software', github: 'higanworks/omnibus-software', ref: 'cacert/use_utf8_for_file-foreach'
 
 # Use Test Kitchen with Vagrant for convering the build environment
 # gem 'rsync'
