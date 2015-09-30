@@ -25,4 +25,4 @@ dependencies:
     - ~/bin/walter -c ci/walter_build.yml
 test:
   override:
-    - echo true
+    - rake > pkg/versions.json
