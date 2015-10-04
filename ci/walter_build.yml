@@ -3,7 +3,7 @@ pipeline:
     parallel:
       - name: ubuntu14
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/ubuntu14:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-ubuntu1404
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM -e BUILD_CACHE_PATH=//home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/ubuntu14:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-ubuntu1404
       - name: centos6
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/centos6:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-centos6
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM  -e BUILD_CACHE_PATH=//home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/centos6:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-centos6
