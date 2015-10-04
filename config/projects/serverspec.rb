@@ -11,7 +11,7 @@ s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.js
 s_versions.select! {|r| r.has_key?('number')}
 s_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
 
-si_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
+si_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/specinfra.json').read)
 si_versions.select! {|r| r.has_key?('number')}
 si_versions.select! {|r| r['number'].match(/^[\d]+\.[\d]+\.[\d]+$/)}
 
