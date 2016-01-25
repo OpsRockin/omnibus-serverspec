@@ -28,11 +28,12 @@ dependency "preparation"
 # serverspec dependencies/components
 
 ## Cert updates
-override :cacerts,
-  version: "2016.01.22",
-  source: {
-  md5: "06629db7f712ff3a75630eccaecc1fe4"
-}
+# override :cacerts,
+#   version: "2016.01.22",
+#   source: {
+#   md5: "36eee0e80373937dd90a9a334ae42817",
+#   url: 'https://raw.githubusercontent.com/bagder/ca-bundle/dfcc02c918b7bf40ed3a7f27a634c74ef4e80829/ca-bundle.crt'
+# }
 
 ## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
 
