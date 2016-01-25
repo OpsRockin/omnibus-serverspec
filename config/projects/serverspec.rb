@@ -36,8 +36,8 @@ override :cacerts,
 
 ## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
 
-description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.1.7"
-override :ruby, version: "2.1.7"
+description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.1.8"
+override :ruby, version: "2.1.8"
 #  source: {
 #  md5: "326e99ddc75381c7b50c85f7089f3260"
 #}
