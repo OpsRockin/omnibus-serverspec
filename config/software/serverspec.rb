@@ -10,9 +10,7 @@ gem_version = s_versions.first['number']   # local_variable
 #source :git => "https://github.com/mizzy/serverspec.git"
 #relative_path "serverspec"
 
-env = {
-  "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"
-}
+env = with_embedded_path()
 
 build do
   gem 'install serverspec --no-ri --no-rdoc'

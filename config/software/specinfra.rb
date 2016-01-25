@@ -10,9 +10,7 @@ gem_version = si_versions.first['number']   # local_variable
 #source :git => "https://github.com/mizzy/specinfra.git"
 #relative_path "specinfra"
 
-env = {
-  "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}"
-}
+env = with_embedded_path()
 
 build do
   gem 'install specinfra --no-ri --no-rdoc'
