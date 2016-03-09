@@ -2,7 +2,7 @@ require 'yaml'
 require 'json'
 require 'open-uri'
 
-
+desc "create versions.json"
 task :default do
   s_versions = JSON.parse(open('https://rubygems.org/api/v1/versions/serverspec.json').read)
   s_versions.select! {|r| r.has_key?('number')}
@@ -40,50 +40,91 @@ task :default do
   puts JSON.pretty_generate vers
 end
 
-task :release_to_packagecloud, 'branch', 'dist', 'type'
-task :release_to_packagecloud do |t, args|
-  case args['branch']
-  when 'master'
-    reponame = 'serverspec'
-  else
-    reponame = 'dummy_with_ci'
+namespace :packagecloud do
+  desc "release to packagecloud"
+  task :release, 'branch', 'dist', 'type'
+  task :release do |t, args|
+    case args['branch']
+    when 'master'
+      reponame = 'serverspec'
+    else
+      reponame = 'dummy_with_ci'
+    end
+
+    raise unless system "bundle exec package_cloud push omnibus-serverspec/#{reponame}/#{args['dist']} pkg/*.#{args['type']}"
   end
 
-  raise unless system "bundle exec package_cloud push omnibus-serverspec/#{reponame}/#{args['dist']} pkg/*.#{args['type']}"
-end
-
-task :yank_oldest_release, 'branch', 'dist'
-task :yank_oldest_release do |t, args|
-  oldest = get_oldest_pkg(args)
-  unless oldest.empty?
-    if args['branch'] == 'master'
-      system "bundle exec package_cloud yank omnibus-serverspec/serverspec/#{args['dist']} #{oldest['filename']}"
-    else
-      system "bundle exec package_cloud yank omnibus-serverspec/dummy_with_ci/#{args['dist']} #{oldest['filename']}"
+  desc "yank from packagecloud"
+  task :yank_oldest, 'branch', 'dist'
+  task :yank_oldest do |t, args|
+    oldest = get_oldest_pkg(args)
+    unless oldest.empty?
+      if args['branch'] == 'master'
+        system "bundle exec package_cloud yank omnibus-serverspec/serverspec/#{args['dist']} #{oldest['filename']}"
+      else
+        system "bundle exec package_cloud yank omnibus-serverspec/dummy_with_ci/#{args['dist']} #{oldest['filename']}"
+      end
     end
   end
+
+  def get_oldest_pkg(args)
+    case args['branch']
+    when 'master'
+      reponame = 'serverspec'
+      gen = 5
+    else
+      reponame = 'dummy_with_ci'
+      gen = 2
+    end
+
+    target_pkgs = JSON.parse(open(
+      "https://packagecloud.io/api/v1/repos/omnibus-serverspec/#{reponame}/packages.json",
+      {:http_basic_authentication => [ENV['PACKAGECLOUD_TOKEN'], ""]}
+    ).read).select {|pkg|
+      pkg['distro_version'] == args['dist']
+    }
+
+    return [] if target_pkgs.length <= gen
+
+    (target_pkgs.sort {|a,b| Time.parse(a['created_at']) <=> Time.parse(b['created_at']) }).first
+  end
 end
 
-
-def get_oldest_pkg(args)
-  case args['branch']
-  when 'master'
-    reponame = 'serverspec'
-    gen = 5
-  else
-    reponame = 'dummy_with_ci'
-    gen = 2
+namespace :bintray do
+  versions = JSON.parse(File.read("pkg/version-manifest.json"))
+  desc "release to bintray"
+  task :release do
+    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
+    system %Q{jfrog bt u --publish --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.rpm omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
+    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
+    system %Q{jfrog bt u --publish --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.deb omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
   end
 
-  target_pkgs = JSON.parse(open(
-    "https://packagecloud.io/api/v1/repos/omnibus-serverspec/#{reponame}/packages.json",
-    {:http_basic_authentication => [ENV['PACKAGECLOUD_TOKEN'], ""]}
-  ).read).select {|pkg|
-    pkg['distro_version'] == args['dist']
-  }
+  task :yank_oldest do
+    rpms = bt_rpm_versions
+    if rpms.length > 3
+      system %Q{jfrog bt vd --quiet=true --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{rpms.sort.first}}
+    end
 
-  return [] if target_pkgs.length <= gen
+    debs = bt_deb_versions
+    if debs.length > 3
+      system %Q{jfrog bt vd --quiet=true --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{rpms.sort.first}}
+    end
+  end
 
-  (target_pkgs.sort {|a,b| Time.parse(a['created_at']) <=> Time.parse(b['created_at']) }).first
+  def bintray_description(software)
+    "Serverspec and Specinfra #{software['specinfra']['locked_version']} with ruby #{software['ruby']['locked_version']}"
+  end
+
+  def bt_rpm_versions
+    rpm_pkgs = `jfrog bt ps omnibus-serverspec/rpm/omnibus-serverspec`
+    JSON.parse(rpm_pkgs.match(/{.+}/m)[0])['versions']
+  end
+
+  def bt_deb_versions
+    deb_pkgs = `jfrog bt ps omnibus-serverspec/deb/omnibus-serverspec`
+    JSON.parse(deb_pkgs.match(/{.+}/m)[0])['versions']
+  end
 end
+
 
