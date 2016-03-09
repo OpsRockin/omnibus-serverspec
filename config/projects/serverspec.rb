@@ -35,18 +35,16 @@ dependency "preparation"
 #   url: 'https://raw.githubusercontent.com/bagder/ca-bundle/dfcc02c918b7bf40ed3a7f27a634c74ef4e80829/ca-bundle.crt'
 # }
 
-## Ruby build 2.2.0 has CFLAG issue? (https://github.com/sstephenson/ruby-build/issues/690)
-
-description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.1.8"
-override :ruby, version: "2.1.8"
+description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.2.4"
+override :ruby, version: "2.2.4"
 #  source: {
 #  md5: "326e99ddc75381c7b50c85f7089f3260"
 #}
 dependency "ruby"
 
-override :rubygems, version: "2.4.8"
+override :rubygems, version: "2.5.2"
 dependency "rubygems"
-override :bundler, version: '1.10.6'
+override :bundler, version: '1.11.2'
 dependency "bundler"
 override :specinfra
 dependency "specinfra"
