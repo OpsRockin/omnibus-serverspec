@@ -42,7 +42,7 @@ override :ruby, version: "2.2.4"
 #}
 dependency "ruby"
 
-override :rubygems, version: "2.5.2"
+override :rubygems, version: "2.4.8"
 dependency "rubygems"
 override :bundler, version: '1.11.2'
 dependency "bundler"
