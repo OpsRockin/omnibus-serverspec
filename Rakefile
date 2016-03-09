@@ -94,22 +94,22 @@ namespace :bintray do
   versions = JSON.parse(File.read("pkg/version-manifest.json"))
   desc "release to bintray"
   task :release do
-    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
-    system %Q{jfrog bt u --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.rpm omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} --publish}
-    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
-    system %Q{jfrog bt u --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.deb omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} --publish}
+    system %Q{jfrog bt vc --desc="#{bintray_description(versions['software'])}" --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
+    system %Q{jfrog bt u --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} --override=true --publish=true pkg/serverspec-*.rpm omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} }
+    system %Q{jfrog bt vc --desc="#{bintray_description(versions['software'])}" --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
+    system %Q{jfrog bt u --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} --override=true --publish=true pkg/serverspec_*.deb omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} }
   end
 
   desc "yank from bintray"
   task :yank_oldest do
     rpms = bt_rpm_versions
     if rpms.length > 3
-      system %Q{jfrog bt vd --quiet=true --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{rpms.sort.first}}
+      system %Q{jfrog bt vd --quiet=true --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{rpms.sort.first}}
     end
 
     debs = bt_deb_versions
     if debs.length > 3
-      system %Q{jfrog bt vd --quiet=true --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{rpms.sort.first}}
+      system %Q{jfrog bt vd --quiet=true --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{rpms.sort.first}}
     end
   end
 

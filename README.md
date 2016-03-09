@@ -4,6 +4,8 @@ serverspec Omnibus project
 [![Circle CI](https://circleci.com/gh/OpsRockin/omnibus-serverspec.svg?style=svg)](https://circleci.com/gh/OpsRockin/omnibus-serverspec)
 [![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/omnibus-serverspec/serverspec)
 
+[Bintray](https://bintray.com/omnibus-serverspec)
+
 This project creates full-stack platform-specific packages for
 [serverspec](http://serverspec.org/ "serverspec - Home")!
 
