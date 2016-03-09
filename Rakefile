@@ -94,12 +94,13 @@ namespace :bintray do
   versions = JSON.parse(File.read("pkg/version-manifest.json"))
   desc "release to bintray"
   task :release do
-    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
-    system %Q{jfrog bt u --publish --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.rpm omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
-    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
-    system %Q{jfrog bt u --publish --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.deb omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}"}
+    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
+    system %Q{jfrog bt u --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.rpm omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} --publish}
+    system %Q{jfrog bt vc --desc "#{bintray_description(versions['software'])}" --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
+    system %Q{jfrog bt u --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} pkg/serverspec-*.deb omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} --publish}
   end
 
+  desc "yank from bintray"
   task :yank_oldest do
     rpms = bt_rpm_versions
     if rpms.length > 3
@@ -117,12 +118,12 @@ namespace :bintray do
   end
 
   def bt_rpm_versions
-    rpm_pkgs = `jfrog bt ps omnibus-serverspec/rpm/omnibus-serverspec`
+    rpm_pkgs = `jfrog bt ps --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec`
     JSON.parse(rpm_pkgs.match(/{.+}/m)[0])['versions']
   end
 
   def bt_deb_versions
-    deb_pkgs = `jfrog bt ps omnibus-serverspec/deb/omnibus-serverspec`
+    deb_pkgs = `jfrog bt ps --user omnibus-serverspec-gh -key #{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec`
     JSON.parse(deb_pkgs.match(/{.+}/m)[0])['versions']
   end
 end
