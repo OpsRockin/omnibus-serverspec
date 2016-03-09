@@ -16,7 +16,8 @@ dependencies:
     - "~/walter"
     - "~/.omnibus_cache"
   pre:
-    - bash ./ci/install-walter-1.2.0.sh
+    - bash ./ci/install-walter-1.3.0.sh
+    - go get github.com/jfrogdev/jfrog-cli-go/...
     - bash -c 'mkdir -p ~/.omnibus_cache/{ubuntu14,centos6}'
     - docker pull opsrock/omnibus_base_ubuntu14
     - docker pull opsrock/omnibus_base_centos6
