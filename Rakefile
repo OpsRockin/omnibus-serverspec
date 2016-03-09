@@ -114,7 +114,7 @@ namespace :bintray do
   end
 
   def bintray_description(software)
-    "Serverspec and Specinfra #{software['specinfra']['locked_version']} with ruby #{software['ruby']['locked_version']}"
+    "Serverspec #{software['serverspec']['locked_version']} and Specinfra #{software['specinfra']['locked_version']} with ruby #{software['ruby']['locked_version']}"
   end
 
   def bt_rpm_versions
