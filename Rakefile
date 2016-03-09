@@ -71,10 +71,10 @@ namespace :packagecloud do
     case args['branch']
     when 'master'
       reponame = 'serverspec'
-      gen = 5
+      gen = 3
     else
       reponame = 'dummy_with_ci'
-      gen = 2
+      gen = 1
     end
 
     target_pkgs = JSON.parse(open(
