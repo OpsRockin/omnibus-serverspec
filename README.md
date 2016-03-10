@@ -2,9 +2,27 @@ serverspec Omnibus project
 ==========================
 
 [![Circle CI](https://circleci.com/gh/OpsRockin/omnibus-serverspec.svg?style=svg)](https://circleci.com/gh/OpsRockin/omnibus-serverspec)
-[![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/omnibus-serverspec/serverspec)
+
+## Packages
+
+### Bintray
 
 [Bintray](https://bintray.com/omnibus-serverspec)
+
+- RPM: [ ![Download](https://api.bintray.com/packages/omnibus-serverspec/rpm/omnibus-serverspec/images/download.svg) ](https://bintray.com/omnibus-serverspec/rpm/omnibus-serverspec/_latestVersion)
+    - Conpatible all rpm-based system. (Such as redhat, centos 6/7, etc...)
+- DEB: [ ![Download](https://api.bintray.com/packages/omnibus-serverspec/deb/omnibus-serverspec/images/download.svg) ](https://bintray.com/omnibus-serverspec/deb/omnibus-serverspec/_latestVersion)
+    - Conpatible all apt-based system.
+
+
+### PackageCloud
+
+- Note: bandwidth limit 15GB
+
+[![Package repository](https://img.shields.io/badge/install%20via-packagecloud.io-green.svg?style=flat-square)](https://packagecloud.io/omnibus-serverspec/serverspec)
+
+
+## Description
 
 This project creates full-stack platform-specific packages for
 [serverspec](http://serverspec.org/ "serverspec - Home")!
