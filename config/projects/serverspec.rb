@@ -36,7 +36,7 @@ dependency "preparation"
 # }
 
 description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.2.5"
-override :ruby, version: "2.2.5"
+override :ruby, version: "2.2.5",
   source: {
   md5: "bd8e349d4fb2c75d90817649674f94be"
 }
