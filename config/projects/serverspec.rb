@@ -35,16 +35,13 @@ dependency "preparation"
 #   url: 'https://raw.githubusercontent.com/bagder/ca-bundle/dfcc02c918b7bf40ed3a7f27a634c74ef4e80829/ca-bundle.crt'
 # }
 
-description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.2.5"
-override :ruby, version: "2.2.5",
-  source: {
-  md5: "bd8e349d4fb2c75d90817649674f94be"
-}
+description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.3.1"
+override :ruby, version: "2.3.1"
 dependency "ruby"
 
-override :rubygems, version: "2.4.8"
+override :rubygems, version: "2.6.7"
 dependency "rubygems"
-override :bundler, version: '1.11.2'
+override :bundler, version: '1.13.6'
 dependency "bundler"
 override :specinfra
 dependency "specinfra"
@@ -52,13 +49,6 @@ dependency "serverspec"
 
 # Addons
 dependency "curl"
-
-## Patch for sourceforge libs
-# https://github.com/chef/omnibus-software/issues/695
-override :zlib, source: {url: 'http://downloads.sourceforge.net/project/libpng/zlib/1.2.8/zlib-1.2.8.tar.gz'}
-override :expat, source: {url: 'http://downloads.sourceforge.net/project/expat/expat/2.1.0/expat-2.1.0.tar.gz'}
-override :pcre, source: {url: 'http://downloads.sourceforge.net/project/pcre/pcre/8.38/pcre-8.38.tar.gz'}
-
 
 # version manifest file
 dependency "version-manifest"
