@@ -36,7 +36,11 @@ dependency "preparation"
 # }
 
 description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.3.1"
-override :ruby, version: "2.3.1"
+override :ruby, version: "2.3.1" ,
+  source: {
+  sha256: "b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd"
+}
+
 dependency "ruby"
 
 # override :rubygems, version: "2.6.7"
