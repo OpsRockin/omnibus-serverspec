@@ -13,6 +13,7 @@ gem_version = s_versions.first['number']   # local_variable
 env = with_embedded_path()
 
 build do
+  gem 'update --system --no-ri --no-rdoc'
   gem 'install serverspec --no-ri --no-rdoc'
   gem 'install infrataster --no-ri --no-rdoc'
   gem 'install winrm --no-ri --no-rdoc'

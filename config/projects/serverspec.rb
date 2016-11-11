@@ -43,8 +43,7 @@ override :ruby, version: "2.3.1" ,
 
 dependency "ruby"
 
-# override :rubygems, version: "2.6.7"
-# dependency "rubygems"
+dependency "rubygems"
 override :bundler, version: '1.13.6'
 dependency "bundler"
 override :specinfra
