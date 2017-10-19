@@ -35,10 +35,10 @@ dependency "preparation"
 #   url: 'https://raw.githubusercontent.com/bagder/ca-bundle/dfcc02c918b7bf40ed3a7f27a634c74ef4e80829/ca-bundle.crt'
 # }
 
-description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.4.2"
-override :ruby, version: "2.4.2",
+description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.3.4"
+override :ruby, version: "2.3.4",
   source: {
-    sha256: "93b9e75e00b262bc4def6b26b7ae8717efc252c47154abb7392e54357e6c8c9c"
+    sha256: "98e18f17c933318d0e32fed3aea67e304f174d03170a38fd920c4fbe49fec0c3"
   }
 
 dependency "ruby"
