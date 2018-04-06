@@ -23,3 +23,6 @@ jobs:
             docker build -t builder-ubuntu1404 -f docker/Dockerfile.ubuntu1404 .
             docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
             ~/bin/walter -c ci/walter_build.yml
+      - store_artifacts:
+           path: /home/circleci/omnibus-serverspec/pkg
+           destination: pkg
