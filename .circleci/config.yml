@@ -25,11 +25,11 @@ jobs:
             docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
             ~/bin/walter -c ci/walter_build.yml
       - run:
-          name: build images to test
+          name: export versions.json
           command: |
             gem update --system
             gem install bundler --no-ri --no-rdoc
-            bundle install --without development test
+            bundle install --without development test ship
             bundle exec rake > pkg/versions.json
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
@@ -86,10 +86,17 @@ jobs:
             go get github.com/jfrogdev/jfrog-cli-go/jfrog-cli/jfrog
             mkdir -p ~/.jfrog && echo '{"bintray":{}}' > ~/.jfrog/jfrog-cli.conf
       - run:
-          name: install built pkgs
+          name: install package_cloud
+          command: |
+            gem update --system
+            gem install bundler --no-ri --no-rdoc
+            bundle install --without development test
+      - run:
+          name: shipit
           command: |
             jfrog --version
             find /tmp/workspace
+            cp -av /tmp/workspace/pkg/* pkg/
       - save_cache:
           key: omnibus-deployment-{{ .Branch }}
           paths:
