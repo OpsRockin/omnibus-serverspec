@@ -68,6 +68,10 @@ jobs:
   deployment:
     machine: true
     working_directory: /home/circleci/omnibus-serverspec
+    branches:
+      only:
+        - master
+        - /build_.*/
     steps:
       - checkout
       - restore_cache:
@@ -94,9 +98,8 @@ jobs:
       - run:
           name: shipit
           command: |
-            jfrog --version
-            find /tmp/workspace
             cp -av /tmp/workspace/pkg/* pkg/
+            ~/bin/walter -c ci/walter_release.yml
       - save_cache:
           key: omnibus-deployment-{{ .Branch }}
           paths:
