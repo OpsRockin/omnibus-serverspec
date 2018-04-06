@@ -6,6 +6,11 @@ jobs:
     working_directory: /home/circleci/omnibus-serverspec
     steps:
       - checkout
+      - restore_cache:
+        key: {{ .Branch }}
+        paths:
+          - /home/circleci/omnibus-serverspec/.omnibus_cache
+          - /home/walter
       - run:
           name: install walter
           command: ./ci/install-walter-1.3.0.sh
@@ -23,6 +28,11 @@ jobs:
             docker build -t builder-ubuntu1404 -f docker/Dockerfile.ubuntu1404 .
             docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
             ~/bin/walter -c ci/walter_build.yml
+      - save_cache:
+        key: {{ .Branch }}
+        paths:
+          - /home/circleci/omnibus-serverspec/.omnibus_cache
+          - /home/walter
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
            destination: pkg
