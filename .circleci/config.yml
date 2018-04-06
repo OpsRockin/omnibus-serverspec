@@ -28,6 +28,20 @@ jobs:
             docker build -t builder-ubuntu1404 -f docker/Dockerfile.ubuntu1404 .
             docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
             ~/bin/walter -c ci/walter_build.yml
+      - run:
+          name: build images to test
+          command: |
+            gem update --system
+            gem install bundler --no-ri --no-rdoc
+            bundle install --without development test
+            bundle exec rake > pkg/versions.json
+      - store_artifacts:
+           path: /home/circleci/omnibus-serverspec/pkg
+           destination: pkg
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - pkg
       - save_cache:
           key: omnibus-{{ .Branch }}
           paths:
@@ -36,3 +50,23 @@ jobs:
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
            destination: pkg
+  test:
+    machine: true
+    working_directory: /home/circleci/omnibus-serverspec
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: install built pkgs
+          command: |
+            docker run -v /tmp/workspace/pkg:/opt/pkg ubuntu:trusty find /opt/pkg/ -name "*deb" -exec dpkg -i {} \;
+            docker run -v /tmp/workspace/pkg:/opt/pkg centos:6 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
+            docker run -v /tmp/workspace/pkg:/opt/pkg centos:7 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+      - test
