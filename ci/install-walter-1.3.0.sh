@@ -1,5 +1,5 @@
-set -x
-set -e
+#!/bin/bash
+set -xe
 W_VERS=1.3.0
 W_DIR=walter_linux_amd64
 
