@@ -68,10 +68,6 @@ jobs:
   deployment:
     machine: true
     working_directory: /home/circleci/omnibus-serverspec
-    branches:
-      only:
-        - master
-        - /build_.*/
     steps:
       - checkout
       - restore_cache:
