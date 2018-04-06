@@ -10,15 +10,11 @@ jobs:
           key: omnibus-{{ .Branch }}
           paths:
             - /home/circleci/omnibus-serverspec/.omnibus_cache
-            - /home/walter
+            - /home/circleci/walter
+            - /home/circleci/.go_workspace
       - run:
           name: install walter
           command: ./ci/install-walter-1.3.0.sh
-      - run:
-          name: install jfrog-cli
-          command: |
-            go get github.com/jfrogdev/jfrog-cli-go/jfrog-cli/jfrog
-            mkdir -p ~/.jfrog && echo '{"bintray":{}}' > ~/.jfrog/jfrog-cli.conf
       - run:
           name: build images to test
           command: |
@@ -38,6 +34,11 @@ jobs:
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
            destination: pkg
+      - run:
+          name: prepare persist_to_workspace
+          command: |
+            mkdir -p /tmp/workspace
+            cp -a pkg /tmp/workspace
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
@@ -46,7 +47,8 @@ jobs:
           key: omnibus-{{ .Branch }}
           paths:
             - /home/circleci/omnibus-serverspec/.omnibus_cache
-            - /home/walter
+            - /home/circleci/walter
+            - /home/circleci/.go_workspace
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
            destination: pkg
@@ -63,6 +65,36 @@ jobs:
             docker run -v /tmp/workspace/pkg:/opt/pkg ubuntu:trusty find /opt/pkg/ -name "*deb" -exec dpkg -i {} \;
             docker run -v /tmp/workspace/pkg:/opt/pkg centos:6 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
             docker run -v /tmp/workspace/pkg:/opt/pkg centos:7 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
+  deployment:
+    machine: true
+    working_directory: /home/circleci/omnibus-serverspec
+    steps:
+      - checkout
+      - restore_cache:
+          key: omnibus-deployment-{{ .Branch }}
+          paths:
+            - /home/circleci/walter
+            - /home/circleci/.go_workspace
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: install walter
+          command: ./ci/install-walter-1.3.0.sh
+      - run:
+          name: install jfrog-cli
+          command: |
+            go get github.com/jfrogdev/jfrog-cli-go/jfrog-cli/jfrog
+            mkdir -p ~/.jfrog && echo '{"bintray":{}}' > ~/.jfrog/jfrog-cli.conf
+      - run:
+          name: install built pkgs
+          command: |
+            jfrog --version
+            find /tmp/workspace
+      - save_cache:
+          key: omnibus-deployment-{{ .Branch }}
+          paths:
+            - /home/circleci/walter
+            - /home/circleci/.go_workspace
 
 workflows:
   version: 2
@@ -72,3 +104,6 @@ workflows:
       - test:
           requires:
             - build
+      - deployment:
+          requires:
+            - test
