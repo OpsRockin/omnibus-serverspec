@@ -1,7 +1,7 @@
 serverspec Omnibus project
 ==========================
 
-[![Circle CI](https://circleci.com/gh/OpsRockin/omnibus-serverspec.svg?style=svg)](https://circleci.com/gh/OpsRockin/omnibus-serverspec)
+[![CircleCI](https://circleci.com/gh/OpsRockin/omnibus-serverspec/tree/master.svg?style=svg)](https://circleci.com/gh/OpsRockin/omnibus-serverspec/tree/master)
 
 ## Packages
 
@@ -54,7 +54,7 @@ You should clone project files when loggd in to VM to avoid conflict bundled env
 $ bundle exec kitchen login ubuntu(or centos)
 [vagrant@ubuntu...] $ git clone serverspec vm
 [vagrant@ubuntu...] $ cd vm
-[vagrant@ubuntu...] $ source /home/omnibus/load-omnibus-toolchain.sh 
+[vagrant@ubuntu...] $ source /home/omnibus/load-omnibus-toolchain.sh
 [vagrant@ubuntu...] $ bundle install --binstubs
 [vagrant@ubuntu...] $ ./bin/omnibus build serverspec
 ```
