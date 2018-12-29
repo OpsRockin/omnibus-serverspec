@@ -82,7 +82,7 @@ jobs:
           command: ./ci/install-walter-1.3.0.sh
       - run:
           name: install jfrog-cli
-          command: curl -fL https://getcli.jfrog.io | sh
+          command: curl -fL https://getcli.jfrog.io | sh -x
       - run:
           name: setup jfrog-cli
           command: |
