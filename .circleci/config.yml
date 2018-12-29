@@ -28,7 +28,7 @@ jobs:
           name: export versions.json
           command: |
             gem update --system
-            gem install bundler --no-ri --no-rdoc
+            gem install bundler --no-document
             bundle install --without development test ship
             bundle exec rake > pkg/versions.json
       - store_artifacts:
@@ -89,7 +89,7 @@ jobs:
           name: install package_cloud
           command: |
             gem update --system
-            gem install bundler --no-ri --no-rdoc
+            gem install bundler --no-document
             bundle install --without development test
       - run:
           name: shipit

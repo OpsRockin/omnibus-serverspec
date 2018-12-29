@@ -13,13 +13,13 @@ gem_version = s_versions.first['number']   # local_variable
 env = with_embedded_path()
 
 build do
-  gem 'update --system --no-ri --no-rdoc'
-  gem 'install serverspec --no-ri --no-rdoc'
-  gem 'install infrataster --no-ri --no-rdoc'
-  gem 'install winrm --no-ri --no-rdoc'
-  gem 'install docker-api --no-ri --no-rdoc'
-  gem 'install rspec_junit_formatter --no-ri --no-rdoc'
-  gem 'install pry pry-doc --no-ri --no-rdoc'
+  gem 'update --system'
+  gem 'install serverspec --no-document'
+  gem 'install infrataster --no-document'
+  gem 'install winrm --no-document'
+  gem 'install docker-api --no-document'
+  gem 'install rspec_junit_formatter --no-document'
+  gem 'install pry pry-doc --no-document'
 
   command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env

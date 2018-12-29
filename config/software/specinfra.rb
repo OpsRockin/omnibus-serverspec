@@ -13,5 +13,5 @@ gem_version = si_versions.first['number']   # local_variable
 env = with_embedded_path()
 
 build do
-  gem 'install specinfra --no-ri --no-rdoc'
+  gem 'install specinfra --no-document'
 end
