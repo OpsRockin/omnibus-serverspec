@@ -82,8 +82,10 @@ jobs:
           command: ./ci/install-walter-1.3.0.sh
       - run:
           name: install jfrog-cli
+          command: curl -fL https://getcli.jfrog.io | sh
+      - run:
+          name: setup jfrog-cli
           command: |
-            go get github.com/jfrogdev/jfrog-cli-go/jfrog-cli/jfrog
             mkdir -p ~/.jfrog && echo '{"bintray":{}}' > ~/.jfrog/jfrog-cli.conf
       - run:
           name: install package_cloud
