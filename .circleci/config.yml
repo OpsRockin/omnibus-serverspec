@@ -62,9 +62,11 @@ jobs:
       - run:
           name: install built pkgs
           command: |
-            docker run -v /tmp/workspace/pkg:/opt/pkg ubuntu:trusty find /opt/pkg/ -name "*deb" -exec dpkg -i {} \;
+            docker run -v /tmp/workspace/pkg:/opt/pkg ubuntu:xenial find /opt/pkg/ -name "*deb" -exec dpkg -i {} \;
+            docker run -v /tmp/workspace/pkg:/opt/pkg ubuntu:bionic find /opt/pkg/ -name "*deb" -exec dpkg -i {} \;
             docker run -v /tmp/workspace/pkg:/opt/pkg centos:6 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
             docker run -v /tmp/workspace/pkg:/opt/pkg centos:7 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
+            docker run -v /tmp/workspace/pkg:/opt/pkg centos:8 find /opt/pkg/ -name "*rpm" -exec rpm -ivh {} \;
   deployment:
     machine: true
     working_directory: /home/circleci/omnibus-serverspec
