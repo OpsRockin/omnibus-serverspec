@@ -27,6 +27,7 @@ jobs:
       - run:
           name: export versions.json
           command: |
+            rvm use 2.4 --default
             gem update --system
             gem install bundler --no-document
             bundle install --without development test ship
@@ -95,6 +96,7 @@ jobs:
       - run:
           name: install package_cloud
           command: |
+            rvm use 2.4 --default
             gem update --system
             gem install bundler --no-document
             bundle install --without development test
