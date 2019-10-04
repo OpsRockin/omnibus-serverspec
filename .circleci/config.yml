@@ -25,11 +25,18 @@ jobs:
             docker build -t builder-centos6 -f docker/Dockerfile.centos6 .
             ~/bin/walter -c ci/walter_build.yml
       - run:
+          name: ruby-version
+          command: |
+            gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+            rvm get stable
+            rvm use 2.5 --default
+            echo ruby-2.5 > .ruby-version
+      - run:
           name: export versions.json
           command: |
             gem update --system
             gem install bundler --no-document
-            bundle install --without development test ship
+            bundle install --without development test ship omnibus
             bundle exec rake > pkg/versions.json
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
@@ -93,11 +100,18 @@ jobs:
             mv ./jfrog ~/bin/
             mkdir -p ~/.jfrog && echo '{"bintray":{}}' > ~/.jfrog/jfrog-cli.conf
       - run:
+          name: ruby-version
+          command: |
+            gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+            rvm get stable
+            rvm use 2.5 --default
+            echo ruby-2.5 > .ruby-version
+      - run:
           name: install package_cloud
           command: |
             gem update --system
             gem install bundler --no-document
-            bundle install --without development test
+            bundle install --without development test omnibus
       - run:
           name: shipit
           command: |
