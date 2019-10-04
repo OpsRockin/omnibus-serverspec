@@ -10,7 +10,7 @@ serverspec Omnibus project
 [Bintray](https://bintray.com/omnibus-serverspec)
 
 - RPM: [ ![Download](https://api.bintray.com/packages/omnibus-serverspec/rpm/omnibus-serverspec/images/download.svg) ](https://bintray.com/omnibus-serverspec/rpm/omnibus-serverspec/_latestVersion)
-    - Conpatible all rpm-based system. (Such as redhat, centos 6/7, etc...)
+    - Conpatible all rpm-based system. (Such as redhat, centos 6/7/8, etc...)
 - DEB: [ ![Download](https://api.bintray.com/packages/omnibus-serverspec/deb/omnibus-serverspec/images/download.svg) ](https://bintray.com/omnibus-serverspec/deb/omnibus-serverspec/_latestVersion)
     - Conpatible all apt-based system.
 
