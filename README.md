@@ -32,7 +32,8 @@ Now, omnibus-serverspec building step is dockernized.
 - <del>https://github.com/OpsRockin/omnibus_base_ubuntu14</del>
 - https://github.com/OpsRockin/omnibus_base_ubuntu16
 - https://github.com/OpsRockin/omnibus_base_ubuntu18
-- https://github.com/OpsRockin/omnibus_base_centos6
+- <del>https://github.com/OpsRockin/omnibus_base_centos6</del>
+- https://github.com/OpsRockin/omnibus_base_centos7
 - https://github.com/OpsRockin/omnibus_base_centos8
 
 

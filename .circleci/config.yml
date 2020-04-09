@@ -20,11 +20,11 @@ jobs:
       - run:
           name: build images to test
           command: |
-            bash -c 'mkdir -p ~/.omnibus_cache/{ubuntu16,centos8}'
+            bash -c 'mkdir -p ~/.omnibus_cache/{ubuntu16,centos7}'
             docker pull opsrock/omnibus_base_ubuntu16
-            docker pull opsrock/omnibus_base_centos8
+            docker pull opsrock/omnibus_base_centos7
             docker build -t builder-ubuntu1604 -f docker/Dockerfile.ubuntu1604 .
-            docker build -t builder-centos8 -f docker/Dockerfile.centos8 .
+            docker build -t builder-centos7 -f docker/Dockerfile.centos7 .
             ~/bin/walter -c ci/walter_build.yml
       - run:
           name: ruby-version
