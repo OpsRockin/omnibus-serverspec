@@ -36,7 +36,8 @@ jobs:
           command: |
             gem update --system
             gem install bundler --no-document
-            bundle install --without development test ship omnibus
+            bundle config set without "development test ship omnibus"
+            bundle install
             bundle exec rake > pkg/versions.json
       - store_artifacts:
            path: /home/circleci/omnibus-serverspec/pkg
@@ -111,7 +112,8 @@ jobs:
           command: |
             gem update --system
             gem install bundler --no-document
-            bundle install --without development test omnibus
+            bundle config set without "development test omnibus"
+            bundle install
       - run:
           name: shipit
           command: |
