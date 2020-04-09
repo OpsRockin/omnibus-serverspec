@@ -76,7 +76,7 @@ jobs:
             for x in bionic focal ; do
               docker run -v /tmp/workspace/pkg:/opt/pkg -v `pwd`/test/test_deb.sh:/tmp/test.sh ubuntu:${x} bash /tmp/test.sh
             done
-            for x in {6..8} ; do
+            for x in {7..8} ; do
               docker run -v /tmp/workspace/pkg:/opt/pkg -v `pwd`/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
             done
   deployment:

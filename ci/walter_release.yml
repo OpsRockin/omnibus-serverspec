@@ -4,9 +4,9 @@ pipeline:
       - name: ubuntu16
         type: command
         command: ./ci/circle_release.sh ubuntu/xenial deb
-      - name: centos6
-        type: command
-        command: ./ci/circle_release.sh el/6 rpm
       - name: centos7
         type: command
         command: ./ci/circle_release.sh el/7 rpm
+      - name: centos8
+        type: command
+        command: ./ci/circle_release.sh el/8 rpm
