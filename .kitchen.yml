@@ -8,7 +8,7 @@ provisioner:
   product_version: 12.4.3
 
 platforms:
-  - name: ubuntu-14.04
+  - name: ubuntu-18.04
     run_list: apt::default
   - name: centos-6.8
 
