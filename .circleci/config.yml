@@ -18,10 +18,10 @@ jobs:
       - run:
           name: build images to test
           command: |
-            bash -c 'mkdir -p ~/.omnibus_cache/{ubuntu18,centos8}'
-            docker pull opsrock/omnibus_base_ubuntu18
+            bash -c 'mkdir -p ~/.omnibus_cache/{ubuntu16,centos8}'
+            docker pull opsrock/omnibus_base_ubuntu16
             docker pull opsrock/omnibus_base_centos8
-            docker build -t builder-ubuntu1804 -f docker/Dockerfile.ubuntu1804 .
+            docker build -t builder-ubuntu1604 -f docker/Dockerfile.ubuntu1604 .
             docker build -t builder-centos8 -f docker/Dockerfile.centos8 .
             ~/bin/walter -c ci/walter_build.yml
       - run:

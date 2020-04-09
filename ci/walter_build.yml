@@ -1,9 +1,9 @@
 pipeline:
   - name: Build pkgs
     parallel:
-      - name: ubuntu18
+      - name: ubuntu16
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/ubuntu18:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-ubuntu1804
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/ubuntu16:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-ubuntu1604
       - name: centos8
         type: command
         command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$CIRCLE_BUILD_NUM  -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $HOME/$CIRCLE_PROJECT_REPONAME/pkg:/home/omnibus/omnibus-project/pkg -v $HOME/.omnibus_cache/centos8:$HOME/$CIRCLE_PROJECT_REPONAME/local builder-centos8

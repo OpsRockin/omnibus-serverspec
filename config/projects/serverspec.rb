@@ -28,9 +28,17 @@ dependency "preparation"
 # serverspec dependencies/components
 
 ## OpenSSL URL Changed(old)
+# example to get latest
+# body = open("https://www.openssl.org/source/").read
+# doc = Nokogiri::HTML.parse(body)
+# doc.xpath('//*[@id="content"]/div/article/div/table/tr[2]/td[3]/a[1]')[0].text
+# => "openssl-1.1.1f.tar.gz"
+openssl_version = '1.1.1f'
 override :openssl,
+  version: openssl_version,
   source: {
-    url: "https://www.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz"
+    # url: "https://www.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz" # for omnibus default version
+    sha256: open("https://www.openssl.org/source/openssl-#{openssl_version}.tar.gz.sha256").read.chomp
   }
 
 ## Cert updates
