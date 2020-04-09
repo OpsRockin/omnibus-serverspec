@@ -1,3 +1,3 @@
-FROM opsrock/omnibus_base_centos8
+FROM opsrock/omnibus_base_centos7
 MAINTAINER sawanoboriyu@higanworks.com
 
