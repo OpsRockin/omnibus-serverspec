@@ -97,7 +97,7 @@ namespace :bintray do
     system %Q{jfrog bt vc --desc="#{bintray_description(versions['software'])}" --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
     system %Q{jfrog bt u --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} --override=true --publish=true pkg/serverspec-*.rpm omnibus-serverspec/rpm/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} }
     system %Q{jfrog bt vc --desc="#{bintray_description(versions['software'])}" --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']}}
-    system %Q{jfrog bt u --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} --override=true --publish=true --deb=trusty/main/amd64 pkg/serverspec_*.deb omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} }
+    system %Q{jfrog bt u --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} --override=true --publish=true --deb=xenial/main/amd64 pkg/serverspec_*.deb omnibus-serverspec/deb/omnibus-serverspec/#{versions['build_version']}-#{ENV['CIRCLE_BUILD_NUM']} }
   end
 
   desc "yank from bintray"

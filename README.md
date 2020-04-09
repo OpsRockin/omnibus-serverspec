@@ -29,7 +29,7 @@ This project creates full-stack platform-specific packages for
 
 Now, omnibus-serverspec building step is dockernized.
 
-- https://github.com/OpsRockin/omnibus_base_ubuntu14
+- <del>https://github.com/OpsRockin/omnibus_base_ubuntu14</del>
 - https://github.com/OpsRockin/omnibus_base_ubuntu16
 - https://github.com/OpsRockin/omnibus_base_ubuntu18
 - https://github.com/OpsRockin/omnibus_base_centos6

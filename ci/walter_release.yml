@@ -1,9 +1,9 @@
 pipeline:
   - name: Release pkgs
     parallel:
-      - name: ubuntu14
+      - name: ubuntu16
         type: command
-        command: ./ci/circle_release.sh ubuntu/trusty deb
+        command: ./ci/circle_release.sh ubuntu/xenial deb
       - name: centos6
         type: command
         command: ./ci/circle_release.sh el/6 rpm
