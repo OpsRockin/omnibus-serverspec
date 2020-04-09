@@ -109,7 +109,7 @@ namespace :bintray do
 
     debs = bt_deb_versions
     if debs.length > 3
-      system %Q{jfrog bt vd --quiet=true --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{rpms.sort.first}}
+      system %Q{jfrog bt vd --quiet=true --user=omnibus-serverspec-gh -key=#{ENV['BINTRAY_APIKEY']} omnibus-serverspec/deb/omnibus-serverspec/#{debs.sort.first}}
     end
   end
 

@@ -49,12 +49,12 @@ override :openssl,
 #   url: 'https://raw.githubusercontent.com/bagder/ca-bundle/dfcc02c918b7bf40ed3a7f27a634c74ef4e80829/ca-bundle.crt'
 # }
 
-description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.6.5"
-override :ruby,
-  version: "2.6.5",
-  source: {
-    sha256: "66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d"
-  }
+description "Serverspec and Specinfra #{si_versions.first['number']} with ruby 2.6"
+# override :ruby,
+#   version: "2.6.5",
+#   source: {
+#     sha256: "66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d"
+#   }
 
 dependency "ruby"
 
