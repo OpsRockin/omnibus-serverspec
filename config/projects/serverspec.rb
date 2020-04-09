@@ -27,6 +27,12 @@ dependency "preparation"
 
 # serverspec dependencies/components
 
+## OpenSSL URL Changed(old)
+override :openssl,
+  source: {
+    url: "https://www.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz"
+  }
+
 ## Cert updates
 # override :cacerts,
 #   version: "2016.01.22",
