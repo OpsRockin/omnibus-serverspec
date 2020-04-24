@@ -17,3 +17,4 @@ doenv.sh
 /.rvmrc
 /cookbooks/
 /tmp/
+/local/
