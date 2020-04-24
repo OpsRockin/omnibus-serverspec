@@ -33,7 +33,7 @@ dependency "preparation"
 # doc = Nokogiri::HTML.parse(body)
 # doc.xpath('//*[@id="content"]/div/article/div/table/tr[2]/td[3]/a[1]')[0].text
 # => "openssl-1.1.1f.tar.gz"
-openssl_version = '1.1.1f'
+openssl_version = '1.1.1g'
 override :openssl,
   version: openssl_version,
   source: {
