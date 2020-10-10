@@ -8,6 +8,8 @@ jobs:
     working_directory: /home/circleci/omnibus-serverspec
     steps:
       - checkout
+      - run: |
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - restore_cache:
           key: omnibus-{{ .Branch }}
           paths:
@@ -64,10 +66,12 @@ jobs:
            destination: pkg
   test:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202007-01
     working_directory: /home/circleci/omnibus-serverspec
     steps:
       - checkout
+      - run: |
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -80,10 +84,13 @@ jobs:
               docker run -v /tmp/workspace/pkg:/opt/pkg -v `pwd`/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
             done
   deployment:
-    machine: true
+    machine:
+      image: ubuntu-1604:202007-01
     working_directory: /home/circleci/omnibus-serverspec
     steps:
       - checkout
+      - run: |
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - restore_cache:
           key: omnibus-deployment-{{ .Branch }}
           paths:
@@ -132,11 +139,17 @@ workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - build
+      - build:
+          context:
+            - opsrock-dh
       - test:
+          context:
+            - opsrock-dh
           requires:
             - build
       - deployment:
+          context:
+            - opsrock-dh
           requires:
             - build
             - test
