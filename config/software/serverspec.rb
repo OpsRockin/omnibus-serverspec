@@ -20,6 +20,7 @@ build do
   gem 'install docker-api --no-document'
   gem 'install rspec_junit_formatter --no-document'
   gem 'install pry pry-doc --no-document'
+  gem 'install highline --no-document'
 
   command "ln -fs #{install_dir}/embedded/bin/serverspec-init #{install_dir}/bin/serverspec-init", :env => env
   command "ln -fs #{install_dir}/embedded/bin/rspec #{install_dir}/bin/rspec", :env => env
