@@ -6,4 +6,4 @@ pipeline:
         command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$GITHUB_RUN_NUMBER -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $GITHUB_WORKSPACE/pkg:/home/omnibus/omnibus-project/pkg builder-ubuntu1604
       - name: centos7
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$GITHUB_RUN_NUMBER  -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $GITHUB_WORKSPACE/pkg builder-centos7
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$GITHUB_RUN_NUMBER  -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $GITHUB_WORKSPACE/pkg:/home/omnibus/omnibus-project/pkg builder-centos7
