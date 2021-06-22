@@ -58,4 +58,27 @@ jobs:
           for x in {7..8} ; do
             docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
           done
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - test
 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: pkgs
+          path: pkg
+      - name: Define Version
+        run: |
+          SS_VERSION=$(cat pkg/versions.json | jq -r .serverspec)
+          echo "RELEASE_VERSION=${SS_VERSION}-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ env.RELEASE_VERSION }}"
+          prerelease: false
+          files: |
+            pkg/*
