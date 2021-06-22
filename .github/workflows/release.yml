@@ -47,12 +47,14 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: pkgs
-      - name: install built pkgs
-        run: |
-          for x in bionic focal ; do
-            docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_deb.sh:/tmp/test.sh ubuntu:${x} bash /tmp/test.sh
-          done
-          for x in {7..8} ; do
-            docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
-          done
+      - name: check files
+        run: ls -R .
+      # - name: install built pkgs
+      #   run: |
+      #     for x in bionic focal ; do
+      #       docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_deb.sh:/tmp/test.sh ubuntu:${x} bash /tmp/test.sh
+      #     done
+      #     for x in {7..8} ; do
+      #       docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
+      #     done
 
