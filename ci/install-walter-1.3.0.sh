@@ -10,4 +10,5 @@ if [ ! -e ~/walter/${W_VERS}/${W_DIR}/walter ]; then
   tar xvzf walter_${W_VERS}_linux_amd64.tar.gz -C ~/walter/${W_VERS}
 fi
 
+mkdir -p ${HOME}/bin
 sudo ln -sf ${HOME}/walter/${W_VERS}/${W_DIR}/walter ${HOME}/bin/walter
