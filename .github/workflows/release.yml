@@ -24,7 +24,7 @@ jobs:
           docker pull opsrock/omnibus_base_centos7
           docker build -t builder-ubuntu1604 -f docker/Dockerfile.ubuntu1604 .
           docker build -t builder-centos7 -f docker/Dockerfile.centos7 .
-          ~/bin/walter -c ci/walter_build.yml
+          ~/bin/walter -c ci/walter_build_gh.yml
       - name: export versions.json
         run: |
           gem update --system
@@ -50,9 +50,9 @@ jobs:
       - name: install built pkgs
         run: |
           for x in bionic focal ; do
-            docker run -v ./pkg:/opt/pkg -v `pwd`/test/test_deb.sh:/tmp/test.sh ubuntu:${x} bash /tmp/test.sh
+            docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_deb.sh:/tmp/test.sh ubuntu:${x} bash /tmp/test.sh
           done
           for x in {7..8} ; do
-            docker run -v ./pkg:/opt/pkg -v `pwd`/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
+            docker run -v $GITHUB_WORKSPACE/pkg:/opt/pkg -v $GITHUB_WORKSPACE/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
           done
 
