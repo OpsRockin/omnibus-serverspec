@@ -37,3 +37,21 @@ jobs:
         with:
           name: pkgs
           path: pkg
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: pkgs
+      - name: install built pkgs
+        run: |
+          for x in bionic focal ; do
+            docker run -v ./pkg:/opt/pkg -v `pwd`/test/test_deb.sh:/tmp/test.sh ubuntu:${x} bash /tmp/test.sh
+          done
+          for x in {7..8} ; do
+            docker run -v ./pkg:/opt/pkg -v `pwd`/test/test_rpm.sh:/tmp/test.sh centos:${x} bash /tmp/test.sh
+          done
+
