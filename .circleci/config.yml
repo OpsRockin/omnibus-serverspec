@@ -147,14 +147,14 @@ workflows:
             - opsrock-dh
           requires:
             - build
-      - deployment:
-          context:
-            - opsrock-dh
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only:
-                - master
-                - /build_.*/
+      # - deployment:
+      #     context:
+      #       - opsrock-dh
+      #     requires:
+      #       - build
+      #       - test
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - /build_.*/
