@@ -74,11 +74,14 @@ jobs:
       - name: Define Version
         run: |
           SS_VERSION=$(cat pkg/versions.json | jq -r .serverspec)
-          echo "RELEASE_VERSION=${SS_VERSION}-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          SI_VERSION=$(cat pkg/versions.json | jq -r .specinfra)
+          echo "RELEASE_VERSION=${SS_VERSION}" >> $GITHUB_ENV
+          echo "SPECINFRA_VERSION=${SI_VERSION}" >> $GITHUB_ENV
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.RELEASE_VERSION }}"
+          automatic_release_tag: "${{ env.RELEASE_VERSION }}-${GITHUB_RUN_NUMBER}"
           prerelease: false
+          title: "${{ env.RELEASE_VERSION }} - ${{ env.SPECINFRA_VERSION }}"
           files: |
             pkg/*

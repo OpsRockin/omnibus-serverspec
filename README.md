@@ -4,7 +4,8 @@ serverspec Omnibus project
 ![example workflow](https://github.com/OpsRockin/omnibus-serverspec/actions/workflows/release.yml/badge.svg)
 
 
-RPM and DEV packages are privided by [Github Releases](https://github.com/OpsRockin/omnibus-serverspec/releases).
+RPM and DEB packages are privided by [Github Releases](https://github.com/OpsRockin/omnibus-serverspec/releases).
+
 
 ## Description
 
