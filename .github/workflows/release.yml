@@ -82,6 +82,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "${{ env.RELEASE_VERSION }}-${{ env.GITHUB_RUN_NUMBER }}"
           prerelease: false
-          title: "${{ env.RELEASE_VERSION }} - ${{ env.SPECINFRA_VERSION }}"
+          title: "${{ env.RELEASE_VERSION }}-${{ env.GITHUB_RUN_NUMBER }} (specinfra ${{ env.SPECINFRA_VERSION }})"
           files: |
             pkg/*
