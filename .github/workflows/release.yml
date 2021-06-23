@@ -80,7 +80,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.RELEASE_VERSION }}-${GITHUB_RUN_NUMBER}"
+          automatic_release_tag: "${{ env.RELEASE_VERSION }}-${{ env.GITHUB_RUN_NUMBER }}"
           prerelease: false
           title: "${{ env.RELEASE_VERSION }} - ${{ env.SPECINFRA_VERSION }}"
           files: |
