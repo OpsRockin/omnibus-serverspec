@@ -1,9 +1,9 @@
 pipeline:
   - name: Build pkgs
     parallel:
-      - name: ubuntu16
+      - name: ubuntu18
         type: command
-        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$GITHUB_RUN_NUMBER -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $GITHUB_WORKSPACE/pkg:/home/omnibus/omnibus-project/pkg builder-ubuntu1604
+        command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$GITHUB_RUN_NUMBER -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $GITHUB_WORKSPACE/pkg:/home/omnibus/omnibus-project/pkg builder-ubuntu1804
       - name: centos7
         type: command
         command: docker run -e OMNIBUS_PROJECT=serverspec -e BUILD_ITERATION=$GITHUB_RUN_NUMBER  -e BUILD_CACHE_PATH=/home/omnibus/omnibus-project/local/omnibus/cache/install_path/opt/serverspec -v $GITHUB_WORKSPACE/pkg:/home/omnibus/omnibus-project/pkg builder-centos7
