@@ -1,3 +1,2 @@
-FROM opsrock/omnibus_base_centos8
-MAINTAINER sawanoboriyu@higanworks.com
-
+FROM ghcr.io/opsrockin/omnibus_base_centos8:master
+LABEL MAINTAINER=sawanoboriyu@higanworks.com
