@@ -126,7 +126,7 @@ GEM
     iniparse (1.5.0)
     iostruct (0.0.4)
     ipaddress (0.8.3)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.3.1)
     json_pure (1.8.1)
     kitchen-vagrant (1.7.0)
